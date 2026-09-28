@@ -18,6 +18,7 @@ function salasvq_render_sections( $sections ) {
 		'cta'        => 'template-parts/home/cta',
 		'galeria'    => 'template-parts/home/galeria',
 		'marquee'    => 'template-parts/home/marquee',
+		'contacto'   => 'template-parts/home/contacto',
 	);
 
 	foreach ( $sections as $section ) {
