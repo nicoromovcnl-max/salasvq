@@ -72,6 +72,11 @@ body.palette-sand {
 *::before,
 *::after {
 	box-sizing: border-box;
+	/* Evita que un hijo de grid/flex se salga de su columna/fila cuando su
+	   contenido (texto largo, elementos rotados, figcaptions...) tiene un
+	   ancho intrínseco mayor: por defecto min-width/min-height es "auto",
+	   no 0, y eso es lo que causaba el desbordamiento en La Sala. */
+	min-width: 0;
 }
 
 html {
@@ -114,7 +119,8 @@ ul {
 	list-style: none;
 }
 
-h1, h2, h3, h4, p {
+h1, h2, h3, h4, p,
+figure, figcaption, blockquote, dl, dd, address {
 	margin: 0;
 }
 
@@ -746,19 +752,26 @@ body::before {
 	position: relative;
 	overflow: hidden;
 	background: var(--black);
+	/* Ancho fijo al 100% de la columna: con align-items:stretch en el
+	   grid padre, aspect-ratio "pelea" con el estirado y el navegador
+	   deriva el ancho de la altura de fila en vez de respetar el track,
+	   desbordando la columna. El recorte real lo hace object-fit:cover
+	   en la imagen, no aspect-ratio en la caja. */
+	width: 100%;
+	min-height: 220px;
 }
 
 .la-sala__media--main {
-	aspect-ratio: 3 / 4;
+	height: 100%;
 }
 
 .la-sala__media--secondary {
-	aspect-ratio: 3 / 5;
 	align-self: end;
 	height: 85%;
 }
 
-.la-sala__media img {
+.la-sala__media img,
+.la-sala__media .ph-block {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
@@ -1168,6 +1181,15 @@ body::before {
 	aspect-ratio: 4 / 3;
 	overflow: hidden;
 	background: var(--black);
+}
+
+.agenda-hero__media img,
+.evento-single__media img,
+.contacto__media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	filter: grayscale(1) contrast(1.1);
 }
 
 .filter-bar--wide {
@@ -1598,8 +1620,6 @@ body::before {
 	}
 }
 
-.preview-banner { background: var(--black); color: var(--paper); text-align: center; font-size: 0.75rem; letter-spacing: 0.05em; padding: 0.5rem; }
-.preview-banner strong { color: var(--yellow); }
 </style>
 </head>
 <body>
@@ -1631,7 +1651,7 @@ body::before {
 		<h1 class="agenda-hero__titular">AGENDA</h1>
 		<p class="agenda-hero__texto">Conciertos, monólogos, improvisación y otras propuestas culturales en el corazón de Sevilla.</p>
 	</div>
-	<div class="agenda-hero__media"><div class="ph-block">Foto de ambiente / público</div></div>
+	<div class="agenda-hero__media"><img src="../assets/img/demo/la-sala-1.svg" alt=""></div>
 </section>
 
 <section class="section agenda-list">
@@ -1653,7 +1673,7 @@ body::before {
 			<article class="event-card">
 				<a class="event-card__link" href="#">
 					<div class="event-card__media">
-						<div class="ph-img">Los Estanques</div>
+						<img src="../assets/img/demo/evento-1.svg" alt="Los Estanques">
 						<div class="event-card__date"><span class="event-card__day">17</span><span class="event-card__month">OCT</span></div>
 						<span class="tag tag--yellow">Música</span>
 					</div>
@@ -1670,7 +1690,7 @@ body::before {
 			<article class="event-card">
 				<a class="event-card__link" href="#">
 					<div class="event-card__media">
-						<div class="ph-img">Lucía Fernández</div>
+						<img src="../assets/img/demo/evento-2.svg" alt="Lucía Fernández">
 						<div class="event-card__date"><span class="event-card__day">25</span><span class="event-card__month">OCT</span></div>
 						<span class="tag tag--pink">Humor</span>
 					</div>
@@ -1687,7 +1707,7 @@ body::before {
 			<article class="event-card">
 				<a class="event-card__link" href="#">
 					<div class="event-card__media">
-						<div class="ph-img">Ruido Local</div>
+						<img src="../assets/img/demo/evento-3.svg" alt="Ruido Local">
 						<div class="event-card__date"><span class="event-card__day">08</span><span class="event-card__month">NOV</span></div>
 						<span class="tag tag--yellow">Música</span>
 					</div>
@@ -1704,7 +1724,7 @@ body::before {
 			<article class="event-card">
 				<a class="event-card__link" href="#">
 					<div class="event-card__media">
-						<div class="ph-img">Impro Sevilla</div>
+						<img src="../assets/img/demo/evento-4.svg" alt="Impro Sevilla">
 						<div class="event-card__date"><span class="event-card__day">16</span><span class="event-card__month">NOV</span></div>
 						<span class="tag tag--black">Impro</span>
 					</div>
@@ -1721,7 +1741,7 @@ body::before {
 			<article class="event-card">
 				<a class="event-card__link" href="#">
 					<div class="event-card__media">
-						<div class="ph-img">Rocío Saiz</div>
+						<img src="../assets/img/demo/evento-1.svg" alt="Rocío Saiz">
 						<div class="event-card__date"><span class="event-card__day">29</span><span class="event-card__month">NOV</span></div>
 						<span class="tag tag--yellow">Música</span>
 					</div>
@@ -1738,7 +1758,7 @@ body::before {
 			<article class="event-card">
 				<a class="event-card__link" href="#">
 					<div class="event-card__media">
-						<div class="ph-img">La Ruina</div>
+						<img src="../assets/img/demo/evento-2.svg" alt="La Ruina">
 						<div class="event-card__date"><span class="event-card__day">07</span><span class="event-card__month">DIC</span></div>
 						<span class="tag tag--pink">Humor</span>
 					</div>
@@ -1755,7 +1775,7 @@ body::before {
 			<article class="event-card">
 				<a class="event-card__link" href="#">
 					<div class="event-card__media">
-						<div class="ph-img">Ruido Local</div>
+						<img src="../assets/img/demo/evento-3.svg" alt="Ruido Local">
 						<div class="event-card__date"><span class="event-card__day">13</span><span class="event-card__month">DIC</span></div>
 						<span class="tag tag--yellow">Música</span>
 					</div>
@@ -1772,7 +1792,7 @@ body::before {
 			<article class="event-card">
 				<a class="event-card__link" href="#">
 					<div class="event-card__media">
-						<div class="ph-img">La Tangente</div>
+						<img src="../assets/img/demo/evento-4.svg" alt="La Tangente">
 						<div class="event-card__date"><span class="event-card__day">21</span><span class="event-card__month">DIC</span></div>
 						<span class="tag tag--black">Escena</span>
 					</div>

@@ -21,28 +21,28 @@ function salasvq_demo_categorias() {
 			'label'       => 'Música',
 			'color'       => 'yellow',
 			'descripcion' => 'Conciertos en directo, bandas emergentes y artistas consagrados sobre el escenario de Sala SVQ.',
-			'imagen'      => SALASVQ_URI . '/assets/img/demo/cat-musica.jpg',
+			'imagen'      => SALASVQ_URI . '/assets/img/demo/cat-musica.svg',
 		),
 		array(
 			'slug'        => 'humor',
 			'label'       => 'Humor',
 			'color'       => 'pink',
 			'descripcion' => 'Monólogos y stand-up de la escena sevillana y nacional, en formato íntimo.',
-			'imagen'      => SALASVQ_URI . '/assets/img/demo/cat-humor.jpg',
+			'imagen'      => SALASVQ_URI . '/assets/img/demo/cat-humor.svg',
 		),
 		array(
 			'slug'        => 'escena',
 			'label'       => 'Escena',
 			'color'       => 'black',
 			'descripcion' => 'Teatro contemporáneo, performance e improvisación fuera de los circuitos convencionales.',
-			'imagen'      => SALASVQ_URI . '/assets/img/demo/cat-escena.jpg',
+			'imagen'      => SALASVQ_URI . '/assets/img/demo/cat-escena.svg',
 		),
 		array(
 			'slug'        => 'sesiones',
 			'label'       => 'Sesiones',
 			'color'       => 'yellow',
 			'descripcion' => 'Vinilos, DJs y noches de club dentro de la sala.',
-			'imagen'      => SALASVQ_URI . '/assets/img/demo/cat-sesiones.jpg',
+			'imagen'      => SALASVQ_URI . '/assets/img/demo/cat-sesiones.svg',
 		),
 	);
 }
@@ -62,7 +62,7 @@ function salasvq_demo_eventos() {
 			'hora'       => '21:00 h',
 			'precio'     => '16 €',
 			'estado'     => 'Entradas disponibles',
-			'imagen'     => SALASVQ_URI . '/assets/img/demo/evento-1.jpg',
+			'imagen'     => SALASVQ_URI . '/assets/img/demo/evento-1.svg',
 			'url'        => '#',
 		),
 		array(
@@ -75,7 +75,7 @@ function salasvq_demo_eventos() {
 			'hora'       => '20:30 h',
 			'precio'     => '18 €',
 			'estado'     => 'Entradas disponibles',
-			'imagen'     => SALASVQ_URI . '/assets/img/demo/evento-2.jpg',
+			'imagen'     => SALASVQ_URI . '/assets/img/demo/evento-2.svg',
 			'url'        => '#',
 		),
 		array(
@@ -88,7 +88,7 @@ function salasvq_demo_eventos() {
 			'hora'       => '23:00 h',
 			'precio'     => '10 €',
 			'estado'     => 'Últimas entradas',
-			'imagen'     => SALASVQ_URI . '/assets/img/demo/evento-3.jpg',
+			'imagen'     => SALASVQ_URI . '/assets/img/demo/evento-3.svg',
 			'url'        => '#',
 		),
 		array(
@@ -101,7 +101,7 @@ function salasvq_demo_eventos() {
 			'hora'       => '20:30 h',
 			'precio'     => '12 €',
 			'estado'     => 'Entradas disponibles',
-			'imagen'     => SALASVQ_URI . '/assets/img/demo/evento-4.jpg',
+			'imagen'     => SALASVQ_URI . '/assets/img/demo/evento-4.svg',
 			'url'        => '#',
 		),
 	);
@@ -198,7 +198,7 @@ function salasvq_normalize_evento( $post ) {
 		'hora'      => get_field( 'hora_evento', $post->ID ) ?: '',
 		'precio'    => get_field( 'precio_evento', $post->ID ) ?: '',
 		'estado'    => get_field( 'estado_evento', $post->ID ) ?: 'Entradas disponibles',
-		'imagen'    => get_the_post_thumbnail_url( $post, 'evento-card' ) ?: SALASVQ_URI . '/assets/img/demo/evento-1.jpg',
+		'imagen'    => get_the_post_thumbnail_url( $post, 'evento-card' ) ?: SALASVQ_URI . '/assets/img/demo/evento-1.svg',
 		'url'       => get_permalink( $post ),
 	);
 }

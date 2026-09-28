@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $titular = $section['titular'] ?? 'CONTACTO';
 $texto   = $section['texto'] ?? 'Si tienes alguna duda, propuesta, quieres colaborar o simplemente venir a tomar algo, escríbenos. Nos encantará leerte.';
-$imagen  = ! empty( $section['imagen'] ) ? $section['imagen'] : '';
+$imagen  = ! empty( $section['imagen'] ) ? $section['imagen'] : SALASVQ_URI . '/assets/img/demo/contacto.svg';
 
 $direccion = salasvq_option( 'direccion_linea1', 'C. Aniceto Sáenz, 1' ) . ', ' . salasvq_option( 'direccion_linea2', '41003 Sevilla' );
 $referencia = salasvq_option( 'direccion_referencia', 'Junto a la Plaza del Pumarejo' );
@@ -22,11 +22,7 @@ $referencia = salasvq_option( 'direccion_referencia', 'Junto a la Plaza del Puma
 	</div>
 
 	<div class="contacto__media">
-		<?php if ( $imagen ) : ?>
-			<img src="<?php echo esc_url( $imagen ); ?>" alt="">
-		<?php else : ?>
-			<div class="ph-block">Fachada de Sala SVQ</div>
-		<?php endif; ?>
+		<img src="<?php echo esc_url( $imagen ); ?>" alt="">
 	</div>
 
 	<div class="contacto__info-grid">

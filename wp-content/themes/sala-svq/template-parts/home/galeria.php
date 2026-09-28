@@ -13,9 +13,9 @@ $imagenes = ! empty( $section['imagenes'] ) ? $section['imagenes'] : array();
 
 if ( empty( $imagenes ) ) {
 	$imagenes = array(
-		SALASVQ_URI . '/assets/img/demo/evento-1.jpg',
-		SALASVQ_URI . '/assets/img/demo/evento-2.jpg',
-		SALASVQ_URI . '/assets/img/demo/evento-3.jpg',
+		SALASVQ_URI . '/assets/img/demo/evento-1.svg',
+		SALASVQ_URI . '/assets/img/demo/evento-2.svg',
+		SALASVQ_URI . '/assets/img/demo/evento-3.svg',
 	);
 }
 ?>

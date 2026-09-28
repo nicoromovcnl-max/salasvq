@@ -57,7 +57,7 @@ while ( have_posts() ) :
 			</div>
 
 			<div class="evento-single__media">
-				<div class="ph-block">Foto principal del evento</div>
+				<img src="<?php echo esc_url( $evento['imagen'] ); ?>" alt="<?php echo esc_attr( $evento['titulo'] ); ?>">
 			</div>
 		</header>
 
