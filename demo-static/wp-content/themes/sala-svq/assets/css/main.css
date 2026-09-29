@@ -1239,6 +1239,213 @@ body::before {
 	grid-template-columns: repeat(4, 1fr);
 }
 
+/* ==========================================================================
+   Agenda — cartelera editorial (destacado / secundario / compacto)
+   ========================================================================== */
+.agenda-cartelera {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.agenda-cartelera__item {
+	grid-column: span 4;
+	transition: opacity 0.25s var(--ease);
+}
+
+.agenda-cartelera__item[hidden] {
+	display: none;
+}
+
+.agenda-cartelera__item--destacado {
+	grid-column: span 12;
+}
+
+.agenda-cartelera__item--secundario {
+	grid-column: span 4;
+}
+
+.agenda-cartelera__item--compacto {
+	grid-column: span 12;
+}
+
+/* --- Destacado: cartel horizontal a todo lo ancho --- */
+.event-card--destacado .event-card__link {
+	flex-direction: row;
+	position: relative;
+}
+
+.event-card--destacado {
+	border-width: 2px;
+}
+
+.event-card--destacado .event-card__media {
+	aspect-ratio: auto;
+	width: 58%;
+	flex-shrink: 0;
+}
+
+.event-card--destacado .event-card__body {
+	flex: 1;
+	justify-content: center;
+	padding: clamp(1.5rem, 3vw, 3rem);
+	position: relative;
+}
+
+.event-card--destacado .event-card__body::before {
+	content: "DESTACADO";
+	position: absolute;
+	top: clamp(1.5rem, 3vw, 3rem);
+	right: clamp(1.5rem, 3vw, 3rem);
+	font-size: var(--fs-small);
+	font-weight: 800;
+	letter-spacing: 0.12em;
+	opacity: 0.4;
+}
+
+.event-card--destacado .event-card__title {
+	font-size: clamp(2.4rem, 5vw, 5rem);
+	line-height: 0.85;
+	margin: 0.75rem 0 1rem;
+}
+
+.event-card--destacado .event-card__subtitle {
+	font-size: var(--fs-body-lg);
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	opacity: 0.75;
+	margin-bottom: 1.5rem;
+	padding-bottom: 0;
+}
+
+.event-card--destacado .event-card__meta {
+	border-top: none;
+	font-size: var(--fs-body-lg);
+	padding-top: 0;
+}
+
+.event-card--destacado .event-card__day {
+	font-size: 2.4rem;
+}
+
+/* --- Secundario: vertical, algo más grande que el compacto --- */
+.event-card--secundario .event-card__media {
+	aspect-ratio: 4 / 5;
+}
+
+.event-card--secundario .event-card__title {
+	font-size: clamp(1.4rem, 2vw, 1.8rem);
+}
+
+/* --- Compacto: fila editorial (fecha + thumb + título + meta) --- */
+.event-row {
+	display: block;
+	border-bottom: 1px solid var(--black);
+}
+
+.agenda-cartelera__item--compacto:first-of-type .event-row {
+	border-top: 1px solid var(--black);
+}
+
+.event-row__link {
+	display: grid;
+	grid-template-columns: 4.5rem 4.5rem 1fr auto;
+	align-items: center;
+	gap: clamp(1rem, 2vw, 1.75rem);
+	padding: clamp(1rem, 2vw, 1.5rem) 0;
+}
+
+.event-row__fecha {
+	display: flex;
+	flex-direction: column;
+	line-height: 0.95;
+}
+
+.event-row__day {
+	font-family: var(--font-display);
+	font-size: clamp(2rem, 3vw, 2.75rem);
+}
+
+.event-row__month {
+	font-size: var(--fs-small);
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	opacity: 0.6;
+}
+
+.event-row__media {
+	width: 4.5rem;
+	height: 4.5rem;
+	overflow: hidden;
+	background: var(--black);
+}
+
+.event-row__media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	filter: grayscale(1) contrast(1.05);
+	transition: transform 0.5s var(--ease);
+}
+
+.event-row:hover .event-row__media img {
+	transform: scale(1.08);
+}
+
+.event-row.is-agotado .event-row__media img {
+	filter: grayscale(1) contrast(1.05) brightness(0.55);
+}
+
+.event-row__tag {
+	display: inline-block;
+	margin-bottom: 0.4rem;
+}
+
+.event-row__title {
+	font-family: var(--font-display);
+	font-size: clamp(1.15rem, 1.8vw, 1.6rem);
+	text-transform: uppercase;
+	line-height: 1;
+}
+
+.event-row__subtitle {
+	font-size: var(--fs-small);
+	opacity: 0.65;
+	margin-top: 0.25rem;
+}
+
+.event-row__meta {
+	display: flex;
+	align-items: center;
+	gap: clamp(0.75rem, 1.5vw, 1.5rem);
+	text-align: right;
+	white-space: nowrap;
+}
+
+.event-row__meta .event-card__estado {
+	position: static;
+	border-color: var(--black);
+	background: var(--paper);
+	color: var(--black);
+}
+
+.event-row__meta .event-card__estado--agotado {
+	background: var(--black);
+	color: var(--paper);
+}
+
+.event-row__precio {
+	opacity: 0.7;
+}
+
+.event-row__arrow {
+	transition: transform 0.25s var(--ease);
+}
+
+.event-row:hover .event-row__arrow {
+	transform: translateX(4px);
+}
+
 .agenda-list__pagination {
 	display: flex;
 	justify-content: center;
@@ -1258,218 +1465,346 @@ body::before {
 }
 
 /* ==========================================================================
-   Single evento
+   Single evento — cartel editorial digital
    ========================================================================== */
-.evento-single__back {
+.evento-poster__back {
 	max-width: var(--container);
 	margin: 0 auto;
 	padding: 1.5rem var(--gutter) 0;
 	font-size: var(--fs-small);
 	font-weight: 700;
 	letter-spacing: 0.05em;
+	position: relative;
+	z-index: 2;
 }
 
-.evento-single__head {
+.evento-poster__cover {
+	position: relative;
+	min-height: 90vh;
+	display: flex;
+	align-items: flex-end;
+	overflow: hidden;
+	background: var(--black);
+	margin-top: -1.5rem;
+}
+
+.evento-poster__cover-media {
+	position: absolute;
+	inset: 0;
+}
+
+.evento-poster__cover-media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	filter: grayscale(1) contrast(1.15) brightness(0.75);
+}
+
+.evento-poster__cover::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(0deg, rgba(23, 21, 18, 0.92) 10%, rgba(23, 21, 18, 0.15) 55%, rgba(23, 21, 18, 0.3) 100%);
+}
+
+.evento-poster__cover-grid {
+	position: relative;
+	z-index: 1;
 	max-width: var(--container);
 	margin: 0 auto;
-	padding: 1.5rem var(--gutter) clamp(2.5rem, 5vw, 4rem);
-	display: grid;
-	grid-template-columns: 1.4fr 0.8fr;
-	grid-template-areas:
-		"intro quickinfo"
-		"media media";
-	gap: clamp(1.5rem, 3vw, 2.5rem);
+	width: 100%;
+	padding: clamp(2rem, 6vw, 4rem) var(--gutter) clamp(2.5rem, 5vw, 4rem);
+	color: var(--paper);
 }
 
-.evento-single__intro { grid-area: intro; }
-.evento-single__quickinfo { grid-area: quickinfo; }
-.evento-single__media { grid-area: media; aspect-ratio: 21 / 9; overflow: hidden; background: var(--black); }
+.evento-poster__fecha {
+	display: flex;
+	align-items: baseline;
+	gap: 0.5rem;
+	line-height: 0.9;
+	margin-bottom: 0.75rem;
+}
 
-.evento-single__titular {
+.evento-poster__fecha-dia {
 	font-family: var(--font-display);
-	font-size: var(--fs-display-lg);
-	text-transform: uppercase;
-	line-height: 0.85;
-	margin: 0.75rem 0 0.25rem;
+	font-size: clamp(2.5rem, 6vw, 4.5rem);
 }
 
-.evento-single__subtitulo {
-	font-size: var(--fs-small);
-	font-weight: 700;
-	letter-spacing: 0.1em;
-	opacity: 0.7;
-}
-
-.evento-single__excerpt {
-	max-width: 46ch;
+.evento-poster__fecha-mes,
+.evento-poster__fecha-anio {
 	font-size: var(--fs-body-lg);
-	margin-top: 1rem;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	opacity: 0.85;
 }
 
-.evento-single__quickinfo {
-	border: 1px solid var(--black);
-	padding: 1.5rem;
-	display: flex;
-	flex-direction: column;
-	gap: 0.75rem;
-	align-self: start;
+.evento-poster__tag {
+	margin-bottom: 1rem;
 }
 
-.evento-single__date-box {
-	display: flex;
-	flex-direction: column;
-	line-height: 1;
-	margin-bottom: 0.5rem;
-}
-
-.evento-single__day {
+.evento-poster__titular {
 	font-family: var(--font-display);
-	font-size: 2.4rem;
+	font-size: var(--fs-display-xl);
+	text-transform: uppercase;
+	line-height: 0.82;
+	margin: 0.25rem 0 0.75rem;
+	max-width: 18ch;
 }
 
-.evento-single__month {
-	font-size: var(--fs-small);
+.evento-poster__titular span {
+	display: block;
+}
+
+.evento-poster__subtitulo {
+	font-size: var(--fs-body-lg);
 	font-weight: 700;
 	letter-spacing: 0.08em;
+	opacity: 0.85;
+	max-width: 40ch;
 }
 
-.evento-single__muted {
+.evento-poster__stamp {
+	position: absolute;
+	top: clamp(1.5rem, 3vw, 2.5rem);
+	right: var(--gutter);
+	z-index: 1;
+	color: var(--paper);
+	font-size: var(--fs-small);
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	writing-mode: vertical-rl;
+	opacity: 0.75;
+}
+
+.evento-poster__ficha {
+	max-width: var(--container);
+	margin: 0 auto;
+	padding: clamp(1.5rem, 3vw, 2.25rem) var(--gutter);
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: clamp(1.5rem, 4vw, 3rem);
+	border-bottom: 1px solid var(--black);
+}
+
+.evento-poster__ficha-item span {
+	display: block;
+	opacity: 0.55;
+	margin-bottom: 0.3em;
+}
+
+.evento-poster__ficha-item p {
+	font-size: var(--fs-body-lg);
+	font-weight: 700;
+}
+
+.evento-poster__muted {
+	font-weight: 400;
 	opacity: 0.65;
 	font-size: var(--fs-small);
 }
 
-.evento-single__precio {
-	font-size: var(--fs-small);
-	opacity: 0.7;
+.evento-poster__cta {
+	margin-left: auto;
 }
 
-.evento-single__body {
+.evento-poster__spread {
 	display: grid;
-	grid-template-columns: 1fr 1.4fr 1fr;
-	gap: clamp(1.5rem, 3vw, 2.5rem);
-	padding-top: 0;
+	grid-template-columns: 1.4fr 1fr;
+	gap: clamp(2rem, 5vw, 4rem);
 }
 
-.evento-single__label {
+.evento-poster__label {
 	font-family: var(--font-sans);
 	font-weight: 800;
-	font-size: var(--fs-small);
-	letter-spacing: 0.08em;
+	font-size: var(--fs-display-sm);
 	text-transform: uppercase;
 	margin-bottom: 1rem;
-	padding-bottom: 0.5rem;
-	border-bottom: 1px solid var(--black);
 }
 
-.evento-single__detalles dl {
-	display: grid;
-	grid-template-columns: auto 1fr;
-	gap: 0.5rem 1rem;
-	font-size: var(--fs-small);
+.evento-poster__texto {
+	font-size: var(--fs-body-lg);
+	font-weight: 300;
+	max-width: 60ch;
 }
 
-.evento-single__detalles dt {
-	font-weight: 700;
-	opacity: 0.6;
-}
-
-.evento-single__texto {
-	font-size: var(--fs-body);
-}
-
-.evento-single__texto > * + * {
+.evento-poster__texto > * + * {
 	margin-top: 1em;
 }
 
-.evento-single__artista-card {
-	display: flex;
-	gap: 1rem;
-	align-items: flex-start;
-}
-
-.evento-single__artista-avatar {
-	width: 3.5rem;
-	height: 3.5rem;
-	flex-shrink: 0;
-	overflow: hidden;
-	border-radius: 50%;
-}
-
-.evento-single__artista-avatar img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	filter: grayscale(1);
-}
-
-.evento-single__artista-nombre {
-	font-weight: 700;
-	margin-bottom: 0.35rem;
-}
-
-.evento-single__artista-desc {
-	font-size: var(--fs-small);
-	opacity: 0.8;
-}
-
-/* ==========================================================================
-   Contacto
-   ========================================================================== */
-.contacto {
+.evento-poster__detalles {
+	margin-top: clamp(1.5rem, 3vw, 2.5rem);
+	padding-top: clamp(1.5rem, 3vw, 2rem);
+	border-top: 1px solid var(--black);
 	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: clamp(1.5rem, 3vw, 2.5rem);
+	grid-template-columns: auto 1fr;
+	gap: 0.5rem 1.25rem;
+	font-size: var(--fs-small);
+	max-width: 46ch;
 }
 
-.contacto__intro,
-.contacto__form {
-	grid-column: 1 / 2;
+.evento-poster__detalles dt {
+	font-weight: 700;
+	opacity: 0.55;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
 }
 
-.contacto__media {
-	grid-column: 2 / 3;
-	grid-row: 1 / 3;
-	aspect-ratio: 3 / 4;
+.evento-poster__col-artista {
+	border-left: 1px solid var(--black);
+	padding-left: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.evento-poster__artista-media {
+	aspect-ratio: 4 / 5;
 	overflow: hidden;
 	background: var(--black);
+	margin: 1rem 0 1.25rem;
 }
 
-.contacto__media img {
+.evento-poster__artista-media img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 	filter: grayscale(1) contrast(1.1);
 }
 
-.contacto__texto {
-	max-width: 42ch;
-	font-size: var(--fs-body-lg);
-	margin-top: 1.25rem;
+.evento-poster__artista-nombre {
+	font-family: var(--font-display);
+	font-size: var(--fs-display-sm);
+	text-transform: uppercase;
+	line-height: 1;
+	margin-bottom: 0.6rem;
 }
 
-.contacto__info-grid {
-	grid-column: 1 / 3;
+.evento-poster__artista-desc {
+	font-size: var(--fs-body);
+	font-weight: 300;
+	opacity: 0.85;
+}
+
+/* ==========================================================================
+   Contacto — portada editorial
+   ========================================================================== */
+.contacto-cover {
+	position: relative;
+	max-width: var(--container);
+	margin: 0 auto;
+	padding: clamp(2rem, 5vw, 3.5rem) var(--gutter) clamp(2.5rem, 5vw, 4rem);
+	display: grid;
+	grid-template-columns: 1.1fr 0.9fr;
+	gap: clamp(1.5rem, 4vw, 3rem);
+	align-items: stretch;
+}
+
+.contacto-cover__media {
+	order: 2;
+	aspect-ratio: 3 / 4;
+	overflow: hidden;
+	background: var(--black);
+	position: relative;
+}
+
+.contacto-cover__media::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border: 6px solid var(--pink);
+	mix-blend-mode: multiply;
+	pointer-events: none;
+}
+
+.contacto-cover__media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	filter: grayscale(1) contrast(1.15);
+}
+
+.contacto-cover__copy {
+	order: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.contacto-cover__titular {
+	font-family: var(--font-display);
+	font-size: var(--fs-display-xl);
+	text-transform: uppercase;
+	line-height: 0.82;
+	margin: 0.75rem 0 1.25rem;
+}
+
+.contacto-cover__texto {
+	max-width: 40ch;
+	margin-bottom: 1.5rem;
+}
+
+.contacto-cover__stamp {
+	position: absolute;
+	bottom: clamp(1rem, 3vw, 2rem);
+	right: var(--gutter);
+	font-size: var(--fs-small);
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	opacity: 0.55;
+	font-variant-numeric: tabular-nums;
+}
+
+.contacto-datos__grid {
+	max-width: var(--container);
+	margin: 0 auto;
+	padding: clamp(1.5rem, 3vw, 2rem) var(--gutter);
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
-	gap: 1.5rem;
-	padding: 1.75rem 0;
-	margin: 1rem 0;
+	gap: clamp(1rem, 2vw, 2rem);
 	border-top: 1px solid var(--black);
 	border-bottom: 1px solid var(--black);
 }
 
-.contacto__info-label {
+.contacto-datos__item span {
 	display: block;
-	font-size: var(--fs-small);
-	font-weight: 800;
-	letter-spacing: 0.06em;
-	text-transform: uppercase;
-	margin-bottom: 0.5rem;
+	margin-bottom: 0.6rem;
 	opacity: 0.6;
 }
 
-.contacto__info-item p a:hover {
+.contacto-datos__item p {
+	font-size: var(--fs-body-lg);
+	font-weight: 600;
+}
+
+.contacto-info__nota {
+	display: block;
+	font-size: var(--fs-small);
+	font-weight: 400;
+	opacity: 0.65;
+	margin-top: 0.3em;
+}
+
+.contacto-datos__item a:hover {
 	color: var(--yellow);
+}
+
+.contacto-mapa__label {
+	max-width: var(--container);
+	margin: clamp(2rem, 5vw, 3.5rem) auto 1rem;
+	padding: 0 var(--gutter);
+}
+
+.contacto-mapa__pin {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) rotate(-4deg);
+	background: var(--yellow);
+	color: var(--paper);
+	font-family: var(--font-display);
+	font-size: var(--fs-small);
+	letter-spacing: 0.08em;
+	padding: 0.4em 0.8em;
+	pointer-events: none;
+	box-shadow: 4px 4px 0 var(--black);
 }
 
 .contacto__form {
@@ -1540,6 +1875,36 @@ body::before {
 	transition: transform 0.15s ease-out, filter 0.6s var(--ease), opacity 0.4s var(--ease);
 	transform-style: preserve-3d;
 	will-change: transform;
+}
+
+/* ==========================================================================
+   Cursor editorial (etiqueta "VER" sobre fotografías interactivas)
+   ========================================================================== */
+.cursor-label {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 60;
+	width: 4.5rem;
+	height: 4.5rem;
+	border-radius: 50%;
+	background: var(--yellow);
+	color: var(--paper);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: var(--font-sans);
+	font-weight: 800;
+	font-size: 0.75rem;
+	letter-spacing: 0.08em;
+	pointer-events: none;
+	opacity: 0;
+	transform: translate(-50%, -50%) scale(0.6);
+	transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+.cursor-label.is-active {
+	opacity: 1;
 }
 
 /* ==========================================================================
@@ -1625,6 +1990,51 @@ body::before {
 .lasala-detalle__texto + .lasala-detalle__texto {
 	margin-top: 1em;
 }
+
+.lasala-palabras {
+	max-width: var(--container);
+	margin: clamp(3rem, 7vw, 5rem) auto;
+	padding: 0 var(--gutter);
+	border-top: 1px solid var(--black);
+	border-bottom: 1px solid var(--black);
+}
+
+.lasala-palabras__eyebrow {
+	display: block;
+	padding: 1.25rem 0 0;
+	opacity: 0.55;
+}
+
+.lasala-palabras__lista {
+	padding: 0.5rem 0 1.5rem;
+}
+
+.lasala-palabras__lista li {
+	border-top: 1px solid rgba(23, 21, 18, 0.12);
+}
+
+.lasala-palabras__lista li:first-child {
+	border-top: none;
+}
+
+.lasala-palabras__lista a {
+	display: block;
+	font-family: var(--font-display);
+	font-size: clamp(2.6rem, 9vw, 7rem);
+	line-height: 1.05;
+	text-transform: uppercase;
+	padding: 0.05em 0;
+	transition: padding-left 0.35s var(--ease), color 0.35s var(--ease);
+}
+
+.lasala-palabras__lista a:hover,
+.lasala-palabras__lista a:focus-visible {
+	padding-left: 0.35em;
+	color: var(--yellow);
+}
+
+.lasala-palabras__lista li:nth-child(2) a { text-align: right; }
+.lasala-palabras__lista li:nth-child(4) a { text-align: right; }
 
 .lasala-gallery {
 	max-width: var(--container);
@@ -1829,7 +2239,7 @@ body::before {
 
 .contacto-mapa {
 	max-width: var(--container);
-	margin: clamp(2rem, 5vw, 3.5rem) auto;
+	margin: 0 auto clamp(2rem, 5vw, 3.5rem);
 	padding: 0 var(--gutter);
 	display: grid;
 	grid-template-columns: 1.4fr 1fr;
@@ -1838,6 +2248,7 @@ body::before {
 }
 
 .contacto-mapa__frame {
+	position: relative;
 	min-height: 340px;
 	background: var(--grey);
 	overflow: hidden;
@@ -1976,11 +2387,107 @@ body::before {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: clamp(1.5rem, 3vw, 3rem);
-	align-items: center;
+	align-items: stretch;
+}
+
+.cat-destacado__body {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.cat-destacado__lugar {
+	margin-top: auto;
+	padding-top: 1.5rem;
+	opacity: 0.45;
+}
+
+/* --- Variantes de personalidad por categoría --- */
+.cat-hero__stamp {
+	position: absolute;
+	margin-top: 1rem;
+	font-size: var(--fs-small);
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	opacity: 0.6;
+	transform: rotate(-3deg);
+}
+
+.cat-hero--musica .cat-hero__titular {
+	letter-spacing: -0.01em;
+	transform: skewX(-2deg);
+}
+
+.cat-hero--sesiones {
+	background: var(--black) !important;
+	color: var(--paper) !important;
+}
+
+.cat-hero--sesiones .cat-hero__index {
+	color: var(--yellow);
+	opacity: 1;
+}
+
+.cat-hero--humor .cat-hero__titular {
+	display: inline-block;
+	background: var(--black);
+	color: var(--paper);
+	padding: 0 0.15em;
+	transform: rotate(-1deg);
+}
+
+.cat-destacado--musica .cat-destacado__card {
+	grid-template-columns: 1.2fr 0.8fr;
+}
+
+.cat-destacado--musica .cat-destacado__media {
+	order: 2;
+	aspect-ratio: 3 / 4;
+}
+
+.cat-destacado--humor .cat-destacado__media {
+	position: relative;
+	transform: rotate(-1.5deg);
+	box-shadow: 10px 10px 0 var(--black);
+	margin: 0.5rem;
+}
+
+.cat-destacado--escena .cat-destacado__titulo {
+	font-style: italic;
+}
+
+.cat-destacado--sesiones {
+	background: var(--black);
+	color: var(--paper);
+}
+
+.cat-destacado--sesiones .cat-destacado__media {
+	filter: brightness(0.9);
+}
+
+.cat-destacado--sesiones .cat-destacado__fecha,
+.cat-destacado--sesiones .section__index {
+	color: var(--yellow);
+	opacity: 1;
+}
+
+.cat-editorial--escena .cat-editorial__texto {
+	max-width: 52ch;
+	font-size: var(--fs-display-sm);
+}
+
+.cat-editorial--sesiones {
+	background: var(--black);
+	color: var(--paper);
+}
+
+.cat-editorial--sesiones .section__index,
+.cat-editorial--sesiones .section__titular {
+	color: var(--paper);
 }
 
 .cat-destacado__media {
-	aspect-ratio: 4 / 3;
+	aspect-ratio: 16 / 11;
 	overflow: hidden;
 	background: var(--black);
 }
@@ -2050,6 +2557,81 @@ body::before {
 }
 
 @media (max-width: 860px) {
+	.evento-poster__cover {
+		min-height: 70vh;
+		align-items: flex-end;
+	}
+
+	.evento-poster__spread {
+		grid-template-columns: 1fr;
+	}
+
+	.evento-poster__col-artista {
+		border-left: none;
+		padding-left: 0;
+		border-top: 1px solid var(--black);
+		padding-top: 1.5rem;
+	}
+
+	.evento-poster__ficha {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.evento-poster__cta {
+		margin-left: 0;
+		width: 100%;
+		justify-content: center;
+	}
+
+	.contacto-cover {
+		grid-template-columns: 1fr;
+	}
+
+	.contacto-cover__media {
+		order: 1;
+		aspect-ratio: 16 / 10;
+	}
+
+	.contacto-cover__copy {
+		order: 2;
+	}
+
+	.contacto-datos__grid {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.contacto-mapa {
+		grid-template-columns: 1fr;
+	}
+
+	.agenda-cartelera__item--secundario {
+		grid-column: span 6;
+	}
+
+	.event-card--destacado .event-card__link {
+		flex-direction: column;
+	}
+
+	.event-card--destacado .event-card__media {
+		width: 100%;
+		aspect-ratio: 16 / 10;
+	}
+
+	.event-row__link {
+		grid-template-columns: 3.5rem 3.5rem 1fr;
+		grid-template-areas: "fecha media body" ". . meta";
+	}
+
+	.event-row__fecha { grid-area: fecha; }
+	.event-row__media { grid-area: media; width: 3.5rem; height: 3.5rem; }
+	.event-row__body { grid-area: body; }
+	.event-row__meta {
+		grid-area: meta;
+		justify-content: flex-start;
+		margin-top: 0.5rem;
+	}
+
 	.site-header__nav {
 		display: none;
 	}
@@ -2176,6 +2758,40 @@ body::before {
 }
 
 @media (max-width: 560px) {
+	.evento-poster__titular {
+		font-size: clamp(2.8rem, 16vw, 4rem);
+		max-width: none;
+	}
+
+	.evento-poster__stamp {
+		display: none;
+	}
+
+	.contacto-datos__grid {
+		grid-template-columns: 1fr;
+	}
+
+	.agenda-cartelera__item--secundario {
+		grid-column: span 12;
+	}
+
+	.event-card--destacado .event-card__title {
+		font-size: clamp(2rem, 12vw, 3rem);
+	}
+
+	.event-row__link {
+		grid-template-columns: 3rem 3rem 1fr;
+	}
+
+	.event-row__meta {
+		flex-wrap: wrap;
+	}
+
+	.lasala-palabras__lista li:nth-child(2) a,
+	.lasala-palabras__lista li:nth-child(4) a {
+		text-align: left;
+	}
+
 	.event-grid,
 	.category-grid {
 		grid-template-columns: 1fr;

@@ -99,42 +99,54 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 
 <main id="main">
 
-<section class="contacto-hero" data-component="contacto-hero">
-	<h1 class="section__titular contacto-hero__titular">CONTACTO</h1>
-	<p class="contacto-hero__texto">Si tienes alguna duda, propuesta, quieres colaborar o simplemente venir a tomar algo, escríbenos. Nos encantará leerte.</p>
-	<span class="mark mark--yellow contacto-hero__mark">SEVILLA SIEMPRE RESPONDE</span>
+<section class="contacto-cover" data-component="contacto-hero">
+	<div class="contacto-cover__media">
+		<img src="../wp-content/uploads/2026/09/bar-interior-2.jpg" alt="Fachada de Sala SVQ">
+	</div>
+
+	<div class="contacto-cover__copy">
+		<span class="eyebrow">SEVILLA · PUMAREJO</span>
+		<h1 class="contacto-cover__titular">CONTAC<br>TO</h1>
+		<p class="lede contacto-cover__texto">Si tienes alguna duda, propuesta, quieres colaborar o simplemente venir a tomar algo, escríbenos. Nos encantará leerte.</p>
+		<span class="mark mark--yellow">SEVILLA SIEMPRE RESPONDE</span>
+	</div>
+
+	<span class="contacto-cover__stamp" aria-hidden="true">37.397° N, 5.987° W</span>
 </section>
 
-<section class="section contacto-info">
-	<div class="contacto-info__grid">
-		<div class="contacto-info__item">
-			<span class="contacto-info__label">Dirección</span>
-			<p>C. Aniceto Sáenz, 1<br>41003 Sevilla<br>Junto a la Plaza del Pumarejo</p>
+<section class="section contacto-datos">
+	<div class="contacto-datos__grid">
+		<div class="contacto-datos__item">
+			<span class="meta-mono">01 — DIRECCIÓN</span>
+			<p>C. Aniceto Sáenz, 1<br>41003 Sevilla<br><span class="contacto-info__nota">Junto a la Plaza del Pumarejo</span></p>
 		</div>
-		<div class="contacto-info__item">
-			<span class="contacto-info__label">Email</span>
-			<p><a href="mailto:hola@salasvq.demo">hola@salasvq.demo</a><br><span class="contacto-info__nota">Intentamos responder en menos de 24 h.</span></p>
+		<div class="contacto-datos__item">
+			<span class="meta-mono">02 — EMAIL</span>
+			<p><a href="mailto:hola@salasvq.demo">hola@salasvq.demo</a><br><span class="contacto-info__nota">Respondemos en menos de 24 h.</span></p>
 		</div>
-		<div class="contacto-info__item">
-			<span class="contacto-info__label">Teléfono</span>
+		<div class="contacto-datos__item">
+			<span class="meta-mono">03 — TELÉFONO</span>
 			<p>+34 955 123 456<br><span class="contacto-info__nota">De martes a domingo, desde las 17:00 h.</span></p>
 		</div>
-		<div class="contacto-info__item">
-			<span class="contacto-info__label">Horario</span>
-			<p>Apertura de sala según eventos.<br><span class="contacto-info__nota">Consulta la programación en la agenda.</span></p>
+		<div class="contacto-datos__item">
+			<span class="meta-mono">04 — HORARIO</span>
+			<p>Según eventos.<br><span class="contacto-info__nota">Consulta la agenda.</span></p>
 		</div>
 	</div>
 </section>
 
 <section class="contacto-mapa" data-component="contacto-mapa">
+	<div class="contacto-mapa__label">
+		<span class="eyebrow">CÓMO LLEGAR</span>
+	</div>
 	<div class="contacto-mapa__frame">
 		<iframe
 			src="https://www.google.com/maps?q=C.%20Aniceto%20S%C3%A1enz%2C%201%2C%2041003%20Sevilla&output=embed"
-			width="100%" height="100%" style="border:0;filter:grayscale(1) contrast(1.1);" loading="lazy"
+			width="100%" height="100%" style="border:0;filter:grayscale(1) contrast(1.15);" loading="lazy"
 			referrerpolicy="no-referrer-when-downgrade" title="Mapa Sala SVQ"></iframe>
+		<span class="contacto-mapa__pin">SALA SVQ</span>
 	</div>
 	<div class="contacto-mapa__llegar">
-		<h2 class="evento-single__label">Cómo llegar</h2>
 		<ul class="contacto-mapa__lista">
 			<li><strong>A pie</strong> — A 10 min de la Alameda de Hércules y 15 min del centro.</li>
 			<li><strong>Autobús</strong> — Líneas C3, C4, 27 (parada Plaza del Pumarejo).</li>
