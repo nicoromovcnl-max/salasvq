@@ -199,6 +199,7 @@ body {
 .mark {
 	position: relative;
 	display: inline-block;
+	align-self: flex-start;
 	font-weight: 700;
 	letter-spacing: 0.08em;
 	font-size: var(--fs-small);
@@ -907,6 +908,19 @@ body {
 	flex-direction: column;
 	justify-content: flex-end;
 	padding: 1.25rem;
+}
+
+.category-card__body::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(0deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.55) 32%, rgba(0, 0, 0, 0.05) 65%, transparent 100%);
+	z-index: 0;
+}
+
+.category-card__body > * {
+	position: relative;
+	z-index: 1;
 }
 
 .category-card__body h3 {
@@ -1805,18 +1819,34 @@ body {
 .contacto-datos__grid {
 	max-width: var(--container);
 	margin: 0 auto;
-	padding: clamp(1.5rem, 3vw, 2rem) var(--gutter);
+	padding: clamp(1.75rem, 3.5vw, 2.5rem) var(--gutter);
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
-	gap: clamp(1rem, 2vw, 2rem);
-	border-top: 1px solid var(--black);
-	border-bottom: 1px solid var(--black);
+	gap: clamp(1.25rem, 2vw, 2rem);
+	background: var(--black);
+	color: var(--paper);
+}
+
+.contacto-datos__item {
+	position: relative;
+	padding-left: clamp(1rem, 2vw, 1.5rem);
+}
+
+.contacto-datos__item + .contacto-datos__item::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0.1em;
+	bottom: 0.1em;
+	width: 1px;
+	background: rgba(243, 239, 232, 0.25);
 }
 
 .contacto-datos__item span {
 	display: block;
 	margin-bottom: 0.6rem;
-	opacity: 0.6;
+	opacity: 0.55;
+	color: var(--yellow);
 }
 
 .contacto-datos__item p {
@@ -1837,9 +1867,7 @@ body {
 }
 
 .contacto-mapa__label {
-	max-width: var(--container);
-	margin: clamp(2rem, 5vw, 3.5rem) auto 1rem;
-	padding: 0 var(--gutter);
+	margin: clamp(2rem, 5vw, 3.5rem) 0 1rem;
 }
 
 .contacto-mapa__pin {
@@ -2431,6 +2459,10 @@ body {
 	grid-template-columns: 1.4fr 1fr;
 	gap: clamp(1rem, 2vw, 1.5rem);
 	align-items: stretch;
+}
+
+.contacto-mapa__label {
+	grid-column: 1 / -1;
 }
 
 .contacto-mapa__frame {
