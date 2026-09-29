@@ -1878,6 +1878,36 @@ body::before {
 }
 
 /* ==========================================================================
+   Cursor editorial (etiqueta "VER" sobre fotografías interactivas)
+   ========================================================================== */
+.cursor-label {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 60;
+	width: 4.5rem;
+	height: 4.5rem;
+	border-radius: 50%;
+	background: var(--yellow);
+	color: var(--paper);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: var(--font-sans);
+	font-weight: 800;
+	font-size: 0.75rem;
+	letter-spacing: 0.08em;
+	pointer-events: none;
+	opacity: 0;
+	transform: translate(-50%, -50%) scale(0.6);
+	transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+.cursor-label.is-active {
+	opacity: 1;
+}
+
+/* ==========================================================================
    Tipografía — utilidades de peso/estilo (jerarquía editorial)
    ========================================================================== */
 .eyebrow {
