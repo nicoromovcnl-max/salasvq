@@ -46,10 +46,19 @@ $filtros = array_merge(
 		<p class="demo-notice">Contenido de ejemplo — se sustituirá por eventos reales gestionados desde WordPress.</p>
 	<?php endif; ?>
 
-	<div class="event-grid event-grid--agenda" data-events-grid>
-		<?php foreach ( $eventos['items'] as $evento ) : ?>
-			<div class="event-grid__item" data-category="<?php echo esc_attr( $evento['categoria']['slug'] ); ?>">
-				<?php get_template_part( 'template-parts/event/card', null, array( 'evento' => $evento ) ); ?>
+	<div class="agenda-cartelera" data-events-grid>
+		<?php
+		foreach ( $eventos['items'] as $i => $evento ) :
+			if ( 0 === $i ) {
+				$size = 'destacado';
+			} elseif ( $i <= 3 ) {
+				$size = 'secundario';
+			} else {
+				$size = 'compacto';
+			}
+			?>
+			<div class="agenda-cartelera__item agenda-cartelera__item--<?php echo esc_attr( $size ); ?>" data-category="<?php echo esc_attr( $evento['categoria']['slug'] ); ?>">
+				<?php get_template_part( 'template-parts/event/card', null, array( 'evento' => $evento, 'size' => $size ) ); ?>
 			</div>
 		<?php endforeach; ?>
 	</div>

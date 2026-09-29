@@ -1239,6 +1239,213 @@ body::before {
 	grid-template-columns: repeat(4, 1fr);
 }
 
+/* ==========================================================================
+   Agenda — cartelera editorial (destacado / secundario / compacto)
+   ========================================================================== */
+.agenda-cartelera {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.agenda-cartelera__item {
+	grid-column: span 4;
+	transition: opacity 0.25s var(--ease);
+}
+
+.agenda-cartelera__item[hidden] {
+	display: none;
+}
+
+.agenda-cartelera__item--destacado {
+	grid-column: span 12;
+}
+
+.agenda-cartelera__item--secundario {
+	grid-column: span 4;
+}
+
+.agenda-cartelera__item--compacto {
+	grid-column: span 12;
+}
+
+/* --- Destacado: cartel horizontal a todo lo ancho --- */
+.event-card--destacado .event-card__link {
+	flex-direction: row;
+	position: relative;
+}
+
+.event-card--destacado {
+	border-width: 2px;
+}
+
+.event-card--destacado .event-card__media {
+	aspect-ratio: auto;
+	width: 58%;
+	flex-shrink: 0;
+}
+
+.event-card--destacado .event-card__body {
+	flex: 1;
+	justify-content: center;
+	padding: clamp(1.5rem, 3vw, 3rem);
+	position: relative;
+}
+
+.event-card--destacado .event-card__body::before {
+	content: "DESTACADO";
+	position: absolute;
+	top: clamp(1.5rem, 3vw, 3rem);
+	right: clamp(1.5rem, 3vw, 3rem);
+	font-size: var(--fs-small);
+	font-weight: 800;
+	letter-spacing: 0.12em;
+	opacity: 0.4;
+}
+
+.event-card--destacado .event-card__title {
+	font-size: clamp(2.4rem, 5vw, 5rem);
+	line-height: 0.85;
+	margin: 0.75rem 0 1rem;
+}
+
+.event-card--destacado .event-card__subtitle {
+	font-size: var(--fs-body-lg);
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	opacity: 0.75;
+	margin-bottom: 1.5rem;
+	padding-bottom: 0;
+}
+
+.event-card--destacado .event-card__meta {
+	border-top: none;
+	font-size: var(--fs-body-lg);
+	padding-top: 0;
+}
+
+.event-card--destacado .event-card__day {
+	font-size: 2.4rem;
+}
+
+/* --- Secundario: vertical, algo más grande que el compacto --- */
+.event-card--secundario .event-card__media {
+	aspect-ratio: 4 / 5;
+}
+
+.event-card--secundario .event-card__title {
+	font-size: clamp(1.4rem, 2vw, 1.8rem);
+}
+
+/* --- Compacto: fila editorial (fecha + thumb + título + meta) --- */
+.event-row {
+	display: block;
+	border-bottom: 1px solid var(--black);
+}
+
+.agenda-cartelera__item--compacto:first-of-type .event-row {
+	border-top: 1px solid var(--black);
+}
+
+.event-row__link {
+	display: grid;
+	grid-template-columns: 4.5rem 4.5rem 1fr auto;
+	align-items: center;
+	gap: clamp(1rem, 2vw, 1.75rem);
+	padding: clamp(1rem, 2vw, 1.5rem) 0;
+}
+
+.event-row__fecha {
+	display: flex;
+	flex-direction: column;
+	line-height: 0.95;
+}
+
+.event-row__day {
+	font-family: var(--font-display);
+	font-size: clamp(2rem, 3vw, 2.75rem);
+}
+
+.event-row__month {
+	font-size: var(--fs-small);
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	opacity: 0.6;
+}
+
+.event-row__media {
+	width: 4.5rem;
+	height: 4.5rem;
+	overflow: hidden;
+	background: var(--black);
+}
+
+.event-row__media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	filter: grayscale(1) contrast(1.05);
+	transition: transform 0.5s var(--ease);
+}
+
+.event-row:hover .event-row__media img {
+	transform: scale(1.08);
+}
+
+.event-row.is-agotado .event-row__media img {
+	filter: grayscale(1) contrast(1.05) brightness(0.55);
+}
+
+.event-row__tag {
+	display: inline-block;
+	margin-bottom: 0.4rem;
+}
+
+.event-row__title {
+	font-family: var(--font-display);
+	font-size: clamp(1.15rem, 1.8vw, 1.6rem);
+	text-transform: uppercase;
+	line-height: 1;
+}
+
+.event-row__subtitle {
+	font-size: var(--fs-small);
+	opacity: 0.65;
+	margin-top: 0.25rem;
+}
+
+.event-row__meta {
+	display: flex;
+	align-items: center;
+	gap: clamp(0.75rem, 1.5vw, 1.5rem);
+	text-align: right;
+	white-space: nowrap;
+}
+
+.event-row__meta .event-card__estado {
+	position: static;
+	border-color: var(--black);
+	background: var(--paper);
+	color: var(--black);
+}
+
+.event-row__meta .event-card__estado--agotado {
+	background: var(--black);
+	color: var(--paper);
+}
+
+.event-row__precio {
+	opacity: 0.7;
+}
+
+.event-row__arrow {
+	transition: transform 0.25s var(--ease);
+}
+
+.event-row:hover .event-row__arrow {
+	transform: translateX(4px);
+}
+
 .agenda-list__pagination {
 	display: flex;
 	justify-content: center;
@@ -2227,6 +2434,33 @@ body::before {
 		grid-template-columns: 1fr;
 	}
 
+	.agenda-cartelera__item--secundario {
+		grid-column: span 6;
+	}
+
+	.event-card--destacado .event-card__link {
+		flex-direction: column;
+	}
+
+	.event-card--destacado .event-card__media {
+		width: 100%;
+		aspect-ratio: 16 / 10;
+	}
+
+	.event-row__link {
+		grid-template-columns: 3.5rem 3.5rem 1fr;
+		grid-template-areas: "fecha media body" ". . meta";
+	}
+
+	.event-row__fecha { grid-area: fecha; }
+	.event-row__media { grid-area: media; width: 3.5rem; height: 3.5rem; }
+	.event-row__body { grid-area: body; }
+	.event-row__meta {
+		grid-area: meta;
+		justify-content: flex-start;
+		margin-top: 0.5rem;
+	}
+
 	.site-header__nav {
 		display: none;
 	}
@@ -2364,6 +2598,22 @@ body::before {
 
 	.contacto-datos__grid {
 		grid-template-columns: 1fr;
+	}
+
+	.agenda-cartelera__item--secundario {
+		grid-column: span 12;
+	}
+
+	.event-card--destacado .event-card__title {
+		font-size: clamp(2rem, 12vw, 3rem);
+	}
+
+	.event-row__link {
+		grid-template-columns: 3rem 3rem 1fr;
+	}
+
+	.event-row__meta {
+		flex-wrap: wrap;
 	}
 
 	.event-grid,

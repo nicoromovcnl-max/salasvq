@@ -19,7 +19,7 @@
 			var grid = bar.closest("section").querySelector("[data-events-grid]");
 			if (!grid) return;
 
-			var items = grid.querySelectorAll(".event-grid__item");
+			var items = grid.querySelectorAll(".event-grid__item, .agenda-cartelera__item");
 			var buttons = bar.querySelectorAll("[data-filter]");
 
 			buttons.forEach(function (button) {
