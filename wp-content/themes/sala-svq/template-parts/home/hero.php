@@ -22,17 +22,32 @@ $imagen    = ! empty( $section['imagen'] ) ? $section['imagen'] : salasvq_demo_p
 $sello     = $section['sello_texto'] ?? 'SALA SVQ · SEVILLA · PUMAREJO';
 
 $lineas = array_filter( array_map( 'trim', explode( "\n", $titular ) ) );
+
+// Fotos de los próximos shows para el ciclo de imágenes del hero (efecto
+// "pixelated image reveal"): la principal + 2-3 siguientes eventos, sin
+// repetir la misma imagen dos veces seguidas.
+$rotacion = array( $imagen );
+foreach ( salasvq_get_eventos( array( 'limit' => 4 ) )['items'] as $ev_rot ) {
+	if ( ! empty( $ev_rot['imagen'] ) && ! in_array( $ev_rot['imagen'], $rotacion, true ) ) {
+		$rotacion[] = $ev_rot['imagen'];
+	}
+	if ( count( $rotacion ) >= 4 ) {
+		break;
+	}
+}
 ?>
 <section class="hero" data-component="hero">
 	<div class="hero__grid">
 		<div class="hero__copy">
 			<p class="hero__kicker"><span class="mark mark--yellow"><?php echo esc_html( $kicker ); ?></span></p>
 
-			<h1 class="hero__titular">
-				<?php foreach ( $lineas as $linea ) : ?>
-					<span class="hero__titular-line"><?php echo esc_html( $linea ); ?></span>
-				<?php endforeach; ?>
-			</h1>
+			<div class="hero__titular-wrap" data-flashlight-text>
+				<h1 class="hero__titular">
+					<?php foreach ( $lineas as $linea ) : ?>
+						<span class="hero__titular-line"><?php echo esc_html( $linea ); ?></span>
+					<?php endforeach; ?>
+				</h1>
+			</div>
 
 			<p class="hero__texto"><?php echo esc_html( $texto ); ?></p>
 
@@ -43,12 +58,12 @@ $lineas = array_filter( array_map( 'trim', explode( "\n", $titular ) ) );
 		</div>
 
 		<div class="hero__media">
-			<figure class="hero__figure">
+			<figure class="hero__figure" data-rotate-images='<?php echo esc_attr( wp_json_encode( array_slice( $rotacion, 1 ) ) ); ?>'>
 				<img src="<?php echo esc_url( $imagen ); ?>" alt="" loading="eager">
 				<span class="hero__figure-tab"></span>
 			</figure>
 
-			<span class="hero__badge">01 / 02 / 03</span>
+			<span class="hero__badge" data-hero-badge>01 / <?php echo esc_html( sprintf( '%02d', count( $rotacion ) ) ); ?></span>
 
 			<div class="hero__stamp" aria-hidden="true">
 				<svg viewBox="0 0 140 140" width="120" height="120">

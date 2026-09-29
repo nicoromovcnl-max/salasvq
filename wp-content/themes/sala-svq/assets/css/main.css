@@ -1928,6 +1928,46 @@ body {
 }
 
 /* ==========================================================================
+   Flashlight text reveal (portada) — inspirado en un componente de
+   21st.dev, reimplementado en CSS + Vanilla JS (máscara radial que sigue
+   al cursor, sin librerías ni WebGL).
+   ========================================================================== */
+.hero__titular-wrap {
+	position: relative;
+}
+
+.hero__titular--glow {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 0;
+	color: var(--yellow);
+	opacity: 0;
+	pointer-events: none;
+	-webkit-mask-image: radial-gradient(circle 150px at var(--mx, 50%) var(--my, 50%), #fff 0%, transparent 72%);
+	mask-image: radial-gradient(circle 150px at var(--mx, 50%) var(--my, 50%), #fff 0%, transparent 72%);
+	-webkit-mask-mode: alpha;
+	mask-mode: alpha;
+	transition: opacity 0.25s ease;
+}
+
+.hero__titular-wrap.is-lit .hero__titular--glow {
+	opacity: 1;
+}
+
+/* ==========================================================================
+   Pixelated image reveal (portada) — ciclo entre fotos de próximos shows,
+   canvas Vanilla JS: bloques grandes que se resuelven hasta nitidez.
+   ========================================================================== */
+.hero__pixel-canvas {
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	transition: opacity 0.15s linear;
+	pointer-events: none;
+}
+
+/* ==========================================================================
    Cursor editorial (etiqueta "VER" sobre fotografías interactivas)
    ========================================================================== */
 .cursor-label {

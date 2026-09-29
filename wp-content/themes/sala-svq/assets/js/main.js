@@ -252,6 +252,150 @@
 		}, { passive: true });
 	}
 
+	// Flashlight text reveal: una "linterna" circular que sigue al cursor
+	// sobre el titular de portada, revelando una copia en color de acento
+	// del mismo texto por debajo. Basado en el patrón de 21st.dev
+	// "flashlight text reveal", reimplementado con mask-image + JS.
+	function initFlashlightText() {
+		if (window.matchMedia && window.matchMedia("(hover: none)").matches) return;
+
+		var wrap = document.querySelector("[data-flashlight-text]");
+		if (!wrap) return;
+		var target = wrap.querySelector(".hero__titular");
+		if (!target) return;
+
+		var glow = target.cloneNode(true);
+		glow.classList.add("hero__titular--glow");
+		glow.setAttribute("aria-hidden", "true");
+		// El clon copia los estilos inline que el scroll-reveal aplicó al
+		// original (opacity 0 en cada línea hasta que entra en viewport);
+		// como el clon nunca es observado, hay que limpiarlos a mano.
+		glow.style.opacity = "";
+		glow.querySelectorAll("*").forEach(function (el) {
+			el.style.opacity = "1";
+			el.style.transform = "none";
+			el.style.transition = "none";
+		});
+		wrap.appendChild(glow);
+
+		wrap.addEventListener("mousemove", function (e) {
+			var rect = glow.getBoundingClientRect();
+			glow.style.setProperty("--mx", e.clientX - rect.left + "px");
+			glow.style.setProperty("--my", e.clientY - rect.top + "px");
+			wrap.classList.add("is-lit");
+		});
+		wrap.addEventListener("mouseleave", function () {
+			wrap.classList.remove("is-lit");
+		});
+	}
+
+	// Pixelated image reveal: ciclo automático entre fotos de próximos
+	// shows en la portada. Cada cambio se resuelve desde bloques de píxel
+	// grandes hasta nitidez, dibujado en un <canvas> (patrón de 21st.dev
+	// "pixelated image reveal", reimplementado sin librerías).
+	function initHeroPixelReveal() {
+		var figure = document.querySelector(".hero__figure[data-rotate-images]");
+		if (!figure) return;
+		var img = figure.querySelector("img");
+		if (!img) return;
+		if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+		var extra;
+		try {
+			extra = JSON.parse(figure.getAttribute("data-rotate-images") || "[]");
+		} catch (err) {
+			extra = [];
+		}
+		var images = [img.currentSrc || img.src].concat(extra);
+		if (images.length < 2) return;
+
+		var canvas = document.createElement("canvas");
+		canvas.className = "hero__pixel-canvas";
+		figure.appendChild(canvas);
+		var ctx = canvas.getContext("2d");
+		var off = document.createElement("canvas");
+		var offCtx = off.getContext("2d");
+
+		var badge = document.querySelector("[data-hero-badge]");
+		var idx = 0;
+		var busy = false;
+
+		function resize() {
+			canvas.width = figure.clientWidth;
+			canvas.height = figure.clientHeight;
+		}
+		resize();
+		window.addEventListener("resize", resize);
+
+		function loadImage(src) {
+			return new Promise(function (resolve) {
+				var im = new Image();
+				im.crossOrigin = "anonymous";
+				im.onload = function () {
+					resolve(im);
+				};
+				im.onerror = function () {
+					resolve(null);
+				};
+				im.src = src;
+			});
+		}
+
+		function cover(im, w, h) {
+			var ratio = Math.max(w / im.width, h / im.height);
+			var iw = im.width * ratio;
+			var ih = im.height * ratio;
+			return { x: (w - iw) / 2, y: (h - ih) / 2, w: iw, h: ih };
+		}
+
+		function revealTo(src) {
+			loadImage(src).then(function (im) {
+				if (!im) {
+					busy = false;
+					return;
+				}
+				var w = canvas.width;
+				var h = canvas.height;
+				var pos = cover(im, w, h);
+				var steps = [40, 26, 16, 9, 4, 1];
+				var i = 0;
+				canvas.style.opacity = "1";
+
+				function drawStep() {
+					var block = steps[i];
+					var sw = Math.max(1, Math.round(w / block));
+					var sh = Math.max(1, Math.round(h / block));
+					off.width = sw;
+					off.height = sh;
+					offCtx.imageSmoothingEnabled = true;
+					offCtx.drawImage(im, pos.x * (sw / w), pos.y * (sh / h), pos.w * (sw / w), pos.h * (sh / h));
+					ctx.imageSmoothingEnabled = false;
+					ctx.clearRect(0, 0, w, h);
+					ctx.drawImage(off, 0, 0, sw, sh, 0, 0, w, h);
+					i++;
+					if (i < steps.length) {
+						window.setTimeout(drawStep, 85);
+					} else {
+						img.src = src;
+						canvas.style.opacity = "0";
+						busy = false;
+					}
+				}
+				drawStep();
+			});
+		}
+
+		window.setInterval(function () {
+			if (busy) return;
+			busy = true;
+			idx = (idx + 1) % images.length;
+			if (badge) {
+				badge.textContent = "0" + (idx + 1) + " / 0" + images.length;
+			}
+			revealTo(images[idx]);
+		}, 4500);
+	}
+
 	document.addEventListener("DOMContentLoaded", function () {
 		initMobileMenu();
 		initFilterBar();
@@ -261,5 +405,7 @@
 		initMagneticButtons();
 		initStaggerReveal();
 		initHeroParallax();
+		initFlashlightText();
+		initHeroPixelReveal();
 	});
 })();
