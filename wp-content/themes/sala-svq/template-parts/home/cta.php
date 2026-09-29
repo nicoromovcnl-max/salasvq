@@ -8,6 +8,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( isset( $args ) && is_array( $args ) ) {
+	extract( $args, EXTR_SKIP );
+}
+
 $kicker    = $section['kicker'] ?? 'SVQ';
 $titular   = $section['titular'] ?? "UN ESPACIO\nPARA LO\nINESPERADO";
 $cta_texto = $section['cta_texto'] ?? 'Entradas';

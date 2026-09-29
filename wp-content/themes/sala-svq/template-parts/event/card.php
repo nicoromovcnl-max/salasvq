@@ -8,6 +8,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( isset( $args ) && is_array( $args ) ) {
+	extract( $args, EXTR_SKIP );
+}
+
 if ( empty( $evento ) ) {
 	return;
 }

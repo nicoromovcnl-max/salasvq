@@ -8,6 +8,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( isset( $args ) && is_array( $args ) ) {
+	extract( $args, EXTR_SKIP );
+}
+
 $titular = $section['titular'] ?? "PRÓXIMOS\nEVENTOS";
 $limite  = ! empty( $section['limite'] ) ? (int) $section['limite'] : 4;
 $lineas  = array_filter( array_map( 'trim', explode( "\n", $titular ) ) );

@@ -8,6 +8,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( isset( $args ) && is_array( $args ) ) {
+	extract( $args, EXTR_SKIP );
+}
+
 $titular   = $section['titular'] ?? "LA\nSALA";
 $texto     = $section['texto'] ?? 'Un espacio cultural en el corazón de Sevilla donde la música, el humor, la improvisación y las artes escénicas conviven sin demasiadas reglas.';
 $cta_texto = $section['cta_texto'] ?? 'Conoce la sala';

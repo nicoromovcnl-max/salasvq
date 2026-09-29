@@ -9,6 +9,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( isset( $args ) && is_array( $args ) ) {
+	extract( $args, EXTR_SKIP );
+}
+
 $kicker   = $section['kicker'] ?? 'SEVILLA EN DIRECTO';
 $titular  = $section['titular'] ?? "MÚSICA\nHUMOR\nESCENA";
 $texto    = $section['texto'] ?? 'Un espacio cercano y sin filtros para la música, el humor, la improvisación y otras formas de encuentro en el corazón de Sevilla.';

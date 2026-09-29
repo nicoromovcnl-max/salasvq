@@ -8,6 +8,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( isset( $args ) && is_array( $args ) ) {
+	extract( $args, EXTR_SKIP );
+}
+
 $titular  = $section['titular'] ?? 'GALERÍA';
 $imagenes = ! empty( $section['imagenes'] ) ? $section['imagenes'] : array();
 

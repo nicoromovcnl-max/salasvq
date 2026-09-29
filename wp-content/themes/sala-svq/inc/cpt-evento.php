@@ -34,6 +34,17 @@ function salasvq_register_evento_cpt() {
 			'rewrite'       => array( 'slug' => 'eventos', 'with_front' => false ),
 			'supports'      => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions' ),
 			'show_in_rest'  => true,
+			/*
+			 * Por defecto WP registra la query var con el mismo nombre que el
+			 * post type ("evento"), que entonces aparece en $wp_query->query_vars
+			 * y "gana" por EXTR_SKIP a nuestra variable $evento dentro de
+			 * cualquier template-part cargado con get_template_part() en una
+			 * vista de single/archivo de evento — provocando un fatal ("Cannot
+			 * access offset of type string on string") porque $evento pasa a
+			 * ser el string del slug en vez del array de datos. Query var propia
+			 * para no colisionar con el nombre de variable que usan las plantillas.
+			 */
+			'query_var'     => 'evento_query',
 		)
 	);
 }

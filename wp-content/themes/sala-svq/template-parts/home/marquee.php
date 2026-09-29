@@ -8,6 +8,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( isset( $args ) && is_array( $args ) ) {
+	extract( $args, EXTR_SKIP );
+}
+
 $texto = $section['texto'] ?? 'MÚSICA · HUMOR · ESCENA · SEVILLA ·';
 ?>
 <section class="marquee" data-component="marquee" aria-hidden="true">

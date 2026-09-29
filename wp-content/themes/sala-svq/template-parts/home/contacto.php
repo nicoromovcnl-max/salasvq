@@ -8,6 +8,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( isset( $args ) && is_array( $args ) ) {
+	extract( $args, EXTR_SKIP );
+}
+
 $titular = $section['titular'] ?? 'CONTACTO';
 $texto   = $section['texto'] ?? 'Si tienes alguna duda, propuesta, quieres colaborar o simplemente venir a tomar algo, escríbenos. Nos encantará leerte.';
 $imagen  = ! empty( $section['imagen'] ) ? $section['imagen'] : SALASVQ_URI . '/assets/img/demo/contacto.svg';
