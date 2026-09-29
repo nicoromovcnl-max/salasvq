@@ -70,9 +70,47 @@
 		});
 	}
 
+	// Detalle de firma: ligerísimo tilt 3D de la fotografía al pasar el
+	// cursor por encima. Nada de efectos de tarjeta SaaS: solo 3-4 grados,
+	// desactivado si el visitante prefiere menos movimiento.
+	function initImageTilt() {
+		if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+		if (window.matchMedia && window.matchMedia("(hover: none)").matches) return;
+
+		var selectors = ".event-card__media, .category-card__media, .cat-destacado__media, .lasala-gallery__item";
+		var containers = document.querySelectorAll(selectors);
+		var MAX_DEG = 4;
+
+		containers.forEach(function (el) {
+			var img = el.querySelector("img");
+			if (!img) return;
+			var raf = null;
+
+			el.addEventListener("mousemove", function (e) {
+				var rect = el.getBoundingClientRect();
+				var px = (e.clientX - rect.left) / rect.width - 0.5;
+				var py = (e.clientY - rect.top) / rect.height - 0.5;
+
+				if (raf) cancelAnimationFrame(raf);
+				raf = requestAnimationFrame(function () {
+					var rx = (-py * MAX_DEG).toFixed(2);
+					var ry = (px * MAX_DEG).toFixed(2);
+					img.style.transform =
+						"scale(1.06) rotateX(" + rx + "deg) rotateY(" + ry + "deg)";
+				});
+			});
+
+			el.addEventListener("mouseleave", function () {
+				if (raf) cancelAnimationFrame(raf);
+				img.style.transform = "";
+			});
+		});
+	}
+
 	document.addEventListener("DOMContentLoaded", function () {
 		initMobileMenu();
 		initFilterBar();
 		initRevealOnLoad();
+		initImageTilt();
 	});
 })();

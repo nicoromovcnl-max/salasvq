@@ -1508,6 +1508,526 @@ body::before {
 	margin-top: 0.5rem;
 }
 
+.contacto__form-select {
+	width: 100%;
+	border: none;
+	border-bottom: 1.5px solid var(--black);
+	background: transparent;
+	padding: 0.6em 0.2em;
+	font-family: var(--font-sans);
+	font-size: var(--fs-body);
+	color: var(--black);
+	appearance: none;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23171512' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 0.3em center;
+}
+
+/* ==========================================================================
+   Microinteracción: tilt 3D sutil de fotografía en hover (main.js)
+   ========================================================================== */
+.event-card__media,
+.category-card__media,
+.cat-destacado__media,
+.lasala-gallery__item {
+	perspective: 800px;
+}
+
+.event-card__media img,
+.category-card__media img,
+.cat-destacado__media img,
+.lasala-gallery__item img {
+	transition: transform 0.15s ease-out, filter 0.6s var(--ease), opacity 0.4s var(--ease);
+	transform-style: preserve-3d;
+	will-change: transform;
+}
+
+/* ==========================================================================
+   Tipografía — utilidades de peso/estilo (jerarquía editorial)
+   ========================================================================== */
+.eyebrow {
+	font-family: var(--font-sans);
+	font-weight: 800;
+	font-size: var(--fs-small);
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+}
+
+.lede {
+	font-family: var(--font-sans);
+	font-weight: 400;
+	font-style: italic;
+	font-size: var(--fs-body-lg);
+	line-height: 1.5;
+}
+
+.meta-mono {
+	font-family: var(--font-sans);
+	font-weight: 600;
+	font-size: var(--fs-small);
+	letter-spacing: 0.08em;
+	font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   La Sala — página editorial
+   ========================================================================== */
+.lasala-hero {
+	max-width: var(--container);
+	margin: 0 auto;
+	padding: clamp(2rem, 5vw, 3.5rem) var(--gutter) 0;
+	display: grid;
+	grid-template-columns: 0.9fr 1.1fr;
+	gap: clamp(1.5rem, 4vw, 3rem);
+	align-items: end;
+}
+
+.lasala-hero__media {
+	aspect-ratio: 3 / 4;
+	overflow: hidden;
+	background: var(--black);
+	order: 2;
+}
+
+.lasala-hero__media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	filter: grayscale(1) contrast(1.1);
+}
+
+.lasala-hero__copy {
+	order: 1;
+	padding-bottom: clamp(1.5rem, 3vw, 3rem);
+}
+
+.lasala-hero__titular {
+	font-family: var(--font-display);
+	font-size: var(--fs-display-xl);
+	text-transform: uppercase;
+	line-height: 0.83;
+	margin: 1rem 0 1.5rem;
+}
+
+.lasala-hero__texto {
+	max-width: 36ch;
+	font-size: var(--fs-body-lg);
+	font-weight: 300;
+}
+
+.lasala-detalle__texto {
+	max-width: 62ch;
+	font-size: var(--fs-body-lg);
+	font-weight: 300;
+	margin-top: 1.25rem;
+}
+
+.lasala-detalle__texto + .lasala-detalle__texto {
+	margin-top: 1em;
+}
+
+.lasala-gallery {
+	max-width: var(--container);
+	margin: clamp(2rem, 5vw, 3.5rem) auto;
+	padding: 0 var(--gutter);
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-auto-rows: 220px;
+	gap: clamp(0.75rem, 1.5vw, 1.25rem);
+}
+
+.lasala-gallery__item {
+	position: relative;
+	overflow: hidden;
+	background: var(--black);
+}
+
+.lasala-gallery__item--tall {
+	grid-row: span 2;
+}
+
+.lasala-gallery__item--wide {
+	grid-column: span 2;
+}
+
+.lasala-gallery__item img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	filter: grayscale(1) contrast(1.1);
+	transition: transform 0.6s var(--ease);
+}
+
+.lasala-gallery__item:hover img {
+	transform: scale(1.06);
+}
+
+.lasala-gallery__item figcaption {
+	position: absolute;
+	left: 0.75rem;
+	bottom: 0.75rem;
+	color: var(--paper);
+	font-size: var(--fs-small);
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+
+.lasala-datos__grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: clamp(1rem, 2vw, 2rem);
+	border-top: 1px solid var(--black);
+	border-bottom: 1px solid var(--black);
+	padding: clamp(1.5rem, 3vw, 2.5rem) 0;
+}
+
+.lasala-datos__label {
+	display: block;
+	font-family: var(--font-display);
+	font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+	text-transform: uppercase;
+	margin-bottom: 0.5rem;
+}
+
+.lasala-datos__valor {
+	font-family: var(--font-display);
+	font-size: clamp(2.2rem, 4vw, 3.2rem);
+	line-height: 1;
+	margin-bottom: 0.25rem;
+}
+
+.lasala-datos__desc {
+	font-size: var(--fs-small);
+	font-weight: 400;
+	opacity: 0.75;
+	max-width: 24ch;
+}
+
+/* ==========================================================================
+   Alquila la Sala — franja potente
+   ========================================================================== */
+.alquiler {
+	background: var(--black);
+	color: var(--paper);
+	position: relative;
+	overflow: hidden;
+}
+
+.alquiler::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	opacity: 0.05;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.alquiler__inner {
+	position: relative;
+	max-width: var(--container);
+	margin: 0 auto;
+	padding: clamp(3.5rem, 8vw, 7rem) var(--gutter);
+}
+
+.alquiler .section__index {
+	color: var(--paper);
+	opacity: 0.6;
+}
+
+.alquiler__titular {
+	font-family: var(--font-display);
+	font-size: var(--fs-display-xl);
+	text-transform: uppercase;
+	line-height: 0.85;
+	margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+	color: var(--yellow);
+}
+
+.alquiler__pregunta {
+	font-family: var(--font-hand);
+	font-size: clamp(1.5rem, 3vw, 2.2rem);
+	line-height: 1.3;
+	color: var(--paper);
+	margin-bottom: 1rem;
+	max-width: 32ch;
+}
+
+.alquiler__texto {
+	font-size: var(--fs-body-lg);
+	font-weight: 300;
+	max-width: 44ch;
+	margin-bottom: 2rem;
+	opacity: 0.9;
+}
+
+.alquiler__lista {
+	display: grid;
+	grid-template-columns: repeat(4, auto);
+	gap: 0.6rem 2rem;
+	margin-bottom: 2.5rem;
+	padding-top: 1.5rem;
+	border-top: 1px solid rgba(242, 240, 233, 0.25);
+	font-weight: 700;
+	font-size: var(--fs-small);
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.alquiler__cta {
+	color: var(--black);
+}
+
+/* ==========================================================================
+   Contacto — página completa
+   ========================================================================== */
+.contacto-hero {
+	max-width: var(--container);
+	margin: 0 auto;
+	padding: clamp(3rem, 7vw, 5rem) var(--gutter) clamp(2rem, 4vw, 3rem);
+}
+
+.contacto-hero__titular {
+	font-size: var(--fs-display-xl);
+}
+
+.contacto-hero__texto {
+	max-width: 48ch;
+	font-size: var(--fs-body-lg);
+	font-weight: 300;
+	margin: 1.25rem 0 1.5rem;
+}
+
+.contacto-info__grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: clamp(1rem, 2vw, 2rem);
+	border-top: 1px solid var(--black);
+	border-bottom: 1px solid var(--black);
+	padding: clamp(1.5rem, 3vw, 2rem) 0;
+}
+
+.contacto-info__label {
+	display: block;
+	font-weight: 800;
+	font-size: var(--fs-small);
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	margin-bottom: 0.6rem;
+	opacity: 0.6;
+}
+
+.contacto-info__item a:hover {
+	color: var(--yellow);
+}
+
+.contacto-info__nota {
+	display: block;
+	font-size: var(--fs-small);
+	opacity: 0.65;
+	margin-top: 0.3em;
+}
+
+.contacto-mapa {
+	max-width: var(--container);
+	margin: clamp(2rem, 5vw, 3.5rem) auto;
+	padding: 0 var(--gutter);
+	display: grid;
+	grid-template-columns: 1.4fr 1fr;
+	gap: clamp(1rem, 2vw, 1.5rem);
+	align-items: stretch;
+}
+
+.contacto-mapa__frame {
+	min-height: 340px;
+	background: var(--grey);
+	overflow: hidden;
+}
+
+.contacto-mapa__frame iframe {
+	width: 100%;
+	height: 100%;
+	min-height: 340px;
+	display: block;
+}
+
+.contacto-mapa__llegar {
+	background: var(--black);
+	color: var(--paper);
+	padding: clamp(1.5rem, 3vw, 2rem);
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+
+.contacto-mapa__lista {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	font-size: var(--fs-small);
+	font-weight: 300;
+	opacity: 0.9;
+}
+
+.contacto-mapa__lista strong {
+	font-weight: 800;
+	display: block;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	font-size: 0.7rem;
+	margin-bottom: 0.15em;
+	opacity: 1;
+}
+
+.contacto-mapa__llegar .btn {
+	align-self: flex-start;
+	border-color: var(--paper);
+	color: var(--paper);
+	margin-top: auto;
+}
+
+.contacto-mapa__llegar .btn:hover {
+	background: var(--paper);
+	color: var(--black);
+}
+
+.contacto-form-section {
+	display: grid;
+	grid-template-columns: 0.8fr 1.2fr;
+	gap: clamp(1.5rem, 3vw, 3rem);
+}
+
+.faq-list {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1rem 2rem;
+	margin-top: 2rem;
+}
+
+.faq-item {
+	border-bottom: 1px solid var(--black);
+	padding-bottom: 1rem;
+}
+
+.faq-item summary {
+	cursor: pointer;
+	font-weight: 700;
+	font-size: var(--fs-body-lg);
+	padding: 0.75rem 1.5rem 0.75rem 0;
+	position: relative;
+	list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+	display: none;
+}
+
+.faq-item summary::after {
+	content: "+";
+	position: absolute;
+	right: 0;
+	top: 0.6rem;
+	font-family: var(--font-display);
+	font-size: 1.5rem;
+	transition: transform 0.25s var(--ease);
+}
+
+.faq-item[open] summary::after {
+	transform: rotate(45deg);
+}
+
+.faq-item p {
+	font-size: var(--fs-body);
+	font-weight: 300;
+	max-width: 56ch;
+	padding-bottom: 0.5rem;
+}
+
+/* ==========================================================================
+   Landing de categoría (taxonomy-categoria_evento.php)
+   ========================================================================== */
+.cat-hero {
+	padding: clamp(4rem, 10vw, 8rem) var(--gutter) clamp(2.5rem, 5vw, 4rem);
+	background: var(--black);
+	color: var(--paper);
+}
+
+.cat-hero.tag--yellow { background: var(--yellow); color: var(--black); }
+.cat-hero.tag--pink { background: var(--pink); color: var(--paper); }
+.cat-hero.tag--grey { background: var(--grey); color: var(--black); }
+
+.cat-hero__index {
+	display: block;
+	font-weight: 800;
+	font-size: var(--fs-small);
+	letter-spacing: 0.2em;
+	opacity: 0.6;
+	margin-bottom: 1rem;
+}
+
+.cat-hero__titular {
+	font-family: var(--font-display);
+	font-size: var(--fs-display-xl);
+	line-height: 0.85;
+	max-width: var(--container);
+	margin: 0 auto;
+}
+
+.cat-destacado__card {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: clamp(1.5rem, 3vw, 3rem);
+	align-items: center;
+}
+
+.cat-destacado__media {
+	aspect-ratio: 4 / 3;
+	overflow: hidden;
+	background: var(--black);
+}
+
+.cat-destacado__media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	filter: grayscale(1) contrast(1.1);
+}
+
+.cat-destacado__fecha {
+	display: block;
+	font-weight: 800;
+	font-size: var(--fs-small);
+	letter-spacing: 0.1em;
+	margin-bottom: 0.75rem;
+	opacity: 0.6;
+}
+
+.cat-destacado__titulo {
+	font-family: var(--font-display);
+	font-size: var(--fs-display-md);
+	text-transform: uppercase;
+	line-height: 0.95;
+	margin-bottom: 0.5rem;
+}
+
+.cat-destacado__subtitulo {
+	font-size: var(--fs-body-lg);
+	font-weight: 300;
+	margin-bottom: 0.75rem;
+}
+
+.cat-destacado__meta {
+	font-size: var(--fs-small);
+	font-weight: 700;
+	margin-bottom: 1.5rem;
+}
+
+.cat-editorial__texto {
+	max-width: 62ch;
+	font-size: var(--fs-body-lg);
+	font-weight: 300;
+	margin-top: 1.25rem;
+}
+
 /* ==========================================================================
    Responsive
    ========================================================================== */
@@ -1610,6 +2130,49 @@ body::before {
 		grid-column: 1;
 		grid-template-columns: 1fr 1fr;
 	}
+
+	.lasala-hero {
+		grid-template-columns: 1fr;
+	}
+
+	.lasala-hero__media {
+		order: -1;
+		aspect-ratio: 4 / 3;
+	}
+
+	.lasala-gallery {
+		grid-template-columns: repeat(2, 1fr);
+		grid-auto-rows: 200px;
+	}
+
+	.lasala-gallery__item--tall {
+		grid-row: span 1;
+	}
+
+	.lasala-datos__grid,
+	.contacto-info__grid {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.alquiler__lista {
+		grid-template-columns: repeat(2, auto);
+	}
+
+	.contacto-mapa {
+		grid-template-columns: 1fr;
+	}
+
+	.contacto-form-section {
+		grid-template-columns: 1fr;
+	}
+
+	.faq-list {
+		grid-template-columns: 1fr;
+	}
+
+	.cat-destacado__card {
+		grid-template-columns: 1fr;
+	}
 }
 
 @media (max-width: 560px) {
@@ -1643,6 +2206,22 @@ body::before {
 	}
 
 	.contacto__info-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.lasala-gallery {
+		grid-template-columns: 1fr;
+	}
+
+	.lasala-gallery__item--wide,
+	.lasala-gallery__item--tall {
+		grid-column: span 1;
+		grid-row: span 1;
+	}
+
+	.lasala-datos__grid,
+	.contacto-info__grid,
+	.alquiler__lista {
 		grid-template-columns: 1fr;
 	}
 }

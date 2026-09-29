@@ -67,12 +67,36 @@ function salasvq_register_categoria_evento_tax() {
 			'labels'       => $labels,
 			'public'       => true,
 			'hierarchical' => false,
-			'rewrite'      => array( 'slug' => 'categoria' ),
+			'rewrite'      => array( 'slug' => 'categoria', 'with_front' => false ),
 			'show_in_rest' => true,
 		)
 	);
 }
 add_action( 'init', 'salasvq_register_categoria_evento_tax' );
+
+/**
+ * Reglas de reescritura explícitas para que cada categoría viva en la raíz
+ * (/musica/, /humor/…) además de en /categoria/musica/. register_taxonomy()
+ * con 'slug' => '' no funciona (WP cae al nombre de la taxonomía), así que
+ * se añaden a mano estas 6 rutas conocidas, con prioridad alta para que
+ * ganen a cualquier regla genérica de página/entrada.
+ */
+function salasvq_categoria_root_rewrites() {
+	$slugs = array( 'musica', 'humor', 'escena', 'sesiones', 'impro', 'otros' );
+	foreach ( $slugs as $slug ) {
+		add_rewrite_rule(
+			'^' . $slug . '/?$',
+			'index.php?categoria_evento=' . $slug,
+			'top'
+		);
+		add_rewrite_rule(
+			'^' . $slug . '/page/([0-9]{1,})/?$',
+			'index.php?categoria_evento=' . $slug . '&paged=$matches[1]',
+			'top'
+		);
+	}
+}
+add_action( 'init', 'salasvq_categoria_root_rewrites', 20 );
 
 /**
  * Categorías por defecto: música, humor, escena, sesiones, impro, otros.
