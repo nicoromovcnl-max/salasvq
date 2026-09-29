@@ -1928,6 +1928,64 @@ body {
 }
 
 /* ==========================================================================
+   Utilidades editoriales: cinta, recorte, nota manuscrita.
+   Elementos de dirección de arte tipo cartel — recortes y cinta pegados
+   sobre las fotografías, notas a mano como acento gráfico puntual.
+   ========================================================================== */
+.tape-mark {
+	position: absolute;
+	width: 88px;
+	height: 26px;
+	background: rgba(243, 239, 232, 0.82);
+	box-shadow: 0 1px 3px rgba(23, 21, 18, 0.25);
+	z-index: 2;
+}
+
+.tape-mark::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: repeating-linear-gradient(45deg, rgba(23, 21, 18, 0.05) 0 2px, transparent 2px 6px);
+}
+
+.tape-mark--top {
+	top: 10px;
+	left: 8%;
+	transform: rotate(-6deg);
+}
+
+.tape-mark--bottom {
+	bottom: 10px;
+	right: 10%;
+	transform: rotate(4deg);
+}
+
+.tape-mark--corner {
+	top: 8px;
+	right: 8px;
+	transform: rotate(38deg);
+}
+
+.cutout-frame {
+	position: relative;
+	outline: 1px solid var(--black);
+	outline-offset: 6px;
+}
+
+.hand-note {
+	display: inline-block;
+	font-family: var(--font-hand);
+	font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+	color: var(--yellow);
+	transform: rotate(-4deg);
+	margin-top: 0.75rem;
+}
+
+.hand-note--light {
+	color: var(--pink);
+}
+
+/* ==========================================================================
    Flashlight text reveal (portada) — inspirado en un componente de
    21st.dev, reimplementado en CSS + Vanilla JS (máscara radial que sigue
    al cursor, sin librerías ni WebGL).
@@ -2081,6 +2139,22 @@ body {
 	margin-top: 1em;
 }
 
+.lasala-detalle__pull {
+	max-width: 50ch;
+	margin: 1.5rem 0;
+	padding-left: 1.25rem;
+	border-left: 3px solid var(--yellow);
+	font-size: var(--fs-display-sm);
+}
+
+.lasala-gallery__item--tilt-left {
+	transform: rotate(-1.5deg);
+}
+
+.lasala-gallery__item--tilt-right {
+	transform: rotate(1.2deg);
+}
+
 .lasala-palabras {
 	max-width: var(--container);
 	margin: clamp(3rem, 7vw, 5rem) auto;
@@ -2182,6 +2256,22 @@ body {
 	padding: clamp(1.5rem, 3vw, 2.5rem) 0;
 }
 
+.lasala-datos__item {
+	position: relative;
+}
+
+.lasala-datos__num {
+	position: absolute;
+	top: -0.6em;
+	right: 0;
+	font-family: var(--font-display);
+	font-size: clamp(2.5rem, 5vw, 4rem);
+	line-height: 1;
+	color: var(--black);
+	opacity: 0.08;
+	pointer-events: none;
+}
+
 .lasala-datos__label {
 	display: block;
 	font-family: var(--font-display);
@@ -2275,6 +2365,12 @@ body {
 
 .alquiler__cta {
 	color: var(--black);
+}
+
+.alquiler__cta + .hand-note {
+	display: block;
+	margin-top: 1rem;
+	margin-left: 0.5rem;
 }
 
 /* ==========================================================================
