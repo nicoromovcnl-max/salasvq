@@ -146,7 +146,7 @@ while ( have_posts() ) :
 					++$count;
 					?>
 					<div class="event-grid__item">
-						<?php get_template_part( 'template-parts/event/card', null, array( 'evento' => $rel ) ); ?>
+						<?php get_template_part( 'template-parts/event/card', null, array( 'evento' => $rel, 'size' => 'secundario' ) ); ?>
 					</div>
 					<?php
 				endforeach;

@@ -60,7 +60,7 @@ $filtros = array_merge(
 	<div class="event-grid" data-events-grid>
 		<?php foreach ( $eventos['items'] as $evento ) : ?>
 			<div class="event-grid__item" data-category="<?php echo esc_attr( $evento['categoria']['slug'] ); ?>">
-				<?php get_template_part( 'template-parts/event/card', null, array( 'evento' => $evento ) ); ?>
+				<?php get_template_part( 'template-parts/event/card', null, array( 'evento' => $evento, 'size' => 'secundario' ) ); ?>
 			</div>
 		<?php endforeach; ?>
 	</div>

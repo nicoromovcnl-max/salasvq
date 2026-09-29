@@ -73,7 +73,7 @@ $resto       = array_slice( $eventos_cat['items'], 1, 6 );
 	<div class="event-grid">
 		<?php foreach ( $resto as $evento ) : ?>
 			<div class="event-grid__item">
-				<?php get_template_part( 'template-parts/event/card', null, array( 'evento' => $evento ) ); ?>
+				<?php get_template_part( 'template-parts/event/card', null, array( 'evento' => $evento, 'size' => 'secundario' ) ); ?>
 			</div>
 		<?php endforeach; ?>
 	</div>
