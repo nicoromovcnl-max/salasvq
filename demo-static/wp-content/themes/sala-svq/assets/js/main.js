@@ -157,11 +157,109 @@
 		});
 	}
 
+	// Botones "magnéticos": el texto se desplaza unos px hacia el cursor
+	// dentro del propio botón, como en los sitios de estudios de diseño.
+	// Nada de físicas raras: solo 6-8px de recorrido máximo.
+	function initMagneticButtons() {
+		if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+		if (window.matchMedia && window.matchMedia("(hover: none)").matches) return;
+
+		var buttons = document.querySelectorAll(".btn");
+		var MAX_PX = 7;
+
+		buttons.forEach(function (btn) {
+			btn.addEventListener("mousemove", function (e) {
+				var rect = btn.getBoundingClientRect();
+				var px = (e.clientX - rect.left) / rect.width - 0.5;
+				var py = (e.clientY - rect.top) / rect.height - 0.5;
+				btn.style.transform = "translate(" + (px * MAX_PX).toFixed(1) + "px, " + (py * MAX_PX).toFixed(1) + "px)";
+			});
+			btn.addEventListener("mouseleave", function () {
+				btn.style.transform = "";
+			});
+		});
+	}
+
+	// Aparición escalonada de tarjetas/fotos al hacer scroll (no solo
+	// titulares): cada elemento entra con un pequeño retardo respecto al
+	// anterior dentro de su mismo contenedor, para dar ritmo de "cartelera".
+	function initStaggerReveal() {
+		if (!("IntersectionObserver" in window)) return;
+		if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+		var groups = document.querySelectorAll(
+			".event-grid, .agenda-cartelera, .category-grid, .lasala-gallery, .gallery__track"
+		);
+
+		groups.forEach(function (group) {
+			var items = group.children;
+			Array.prototype.forEach.call(items, function (el, i) {
+				el.style.opacity = "0";
+				el.style.transform = "translateY(1.25rem)";
+				el.style.transition =
+					"opacity 0.55s cubic-bezier(0.22,1,0.36,1) " + Math.min(i % 8, 7) * 0.07 + "s, " +
+					"transform 0.55s cubic-bezier(0.22,1,0.36,1) " + Math.min(i % 8, 7) * 0.07 + "s";
+			});
+
+			var observer = new IntersectionObserver(
+				function (entries, obs) {
+					entries.forEach(function (entry) {
+						if (entry.isIntersecting) {
+							entry.target.style.opacity = "1";
+							entry.target.style.transform = "translateY(0)";
+							obs.unobserve(entry.target);
+						}
+					});
+				},
+				{ threshold: 0.15 }
+			);
+
+			Array.prototype.forEach.call(items, function (el) {
+				observer.observe(el);
+			});
+		});
+
+		// Red de seguridad: si por lo que sea el observer no llega a disparar
+		// para algún elemento (捕获 automatizadas, timing raro, etc.), a los
+		// 2.5s se fuerza la visibilidad de todo. Preferible a arriesgarse a
+		// contenido invisible.
+		window.setTimeout(function () {
+			document.querySelectorAll(
+				".event-grid > *, .agenda-cartelera > *, .category-grid > *, .lasala-gallery > *, .gallery__track > *"
+			).forEach(function (el) {
+				el.style.opacity = "1";
+				el.style.transform = "none";
+			});
+		}, 2500);
+	}
+
+	// Parallax muy sutil en la foto del hero: se mueve un poco más lento
+	// que el scroll, físico, no un efecto de cine.
+	function initHeroParallax() {
+		var media = document.querySelector(".hero__figure img");
+		if (!media) return;
+		if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+		var ticking = false;
+		window.addEventListener("scroll", function () {
+			if (ticking) return;
+			ticking = true;
+			requestAnimationFrame(function () {
+				var y = Math.min(window.scrollY, 600);
+				media.style.transform = "translateY(" + (y * 0.12).toFixed(1) + "px) scale(1.08)";
+				ticking = false;
+			});
+		}, { passive: true });
+	}
+
 	document.addEventListener("DOMContentLoaded", function () {
 		initMobileMenu();
 		initFilterBar();
 		initRevealOnLoad();
 		initImageTilt();
 		initCursorLabel();
+		initMagneticButtons();
+		initStaggerReveal();
+		initHeroParallax();
 	});
 })();

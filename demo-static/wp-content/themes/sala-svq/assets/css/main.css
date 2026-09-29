@@ -157,15 +157,22 @@ body::before {
 	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Solo se aplica sobre el fondo de papel, nunca sobre fotografías: en vez
-   de una capa fija a pantalla completa (que oscurecía las fotos en b/n por
-   debajo con mix-blend-mode), se pinta directamente en el <body> detrás
-   del contenido, y las secciones con foto ya llevan su propio fondo opaco
-   por encima que la tapa. */
+/* Solo se aplica sobre el fondo de papel, nunca sobre fotografías: se pinta
+   directamente en el <body> detrás del contenido, y las secciones con foto
+   ya llevan su propio fondo opaco por encima que la tapa. Manchas radiales
+   sueltas en vez de una textura en mosaico: no repite, así no se ven las
+   costuras del patrón. */
 body {
-	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='4' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.09  0 0 0 0 0.08  0 0 0 0 0.07  0 0 0 0.22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
-	background-size: 600px 600px;
 	background-color: var(--bg);
+	background-image:
+		radial-gradient(ellipse 60% 40% at 8% 12%, rgba(23,21,18,0.05), transparent 60%),
+		radial-gradient(ellipse 50% 35% at 85% 8%, rgba(23,21,18,0.04), transparent 60%),
+		radial-gradient(ellipse 45% 55% at 92% 60%, rgba(23,21,18,0.05), transparent 60%),
+		radial-gradient(ellipse 55% 40% at 15% 70%, rgba(23,21,18,0.04), transparent 60%),
+		radial-gradient(ellipse 50% 45% at 50% 95%, rgba(23,21,18,0.05), transparent 60%),
+		radial-gradient(ellipse 40% 30% at 60% 35%, rgba(23,21,18,0.03), transparent 60%);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
 }
 
 /* ==========================================================================
@@ -222,6 +229,7 @@ body {
 	text-transform: uppercase;
 	padding: 0.95em 1.6em;
 	border: 1.5px solid var(--black);
+	transition: transform 0.2s var(--ease), background-color 0.2s var(--ease), color 0.2s var(--ease);
 	background: transparent;
 	transition: background var(--dur) var(--ease), color var(--dur) var(--ease), transform 0.2s var(--ease);
 }
@@ -1007,6 +1015,34 @@ body {
 	filter: grayscale(1) contrast(1.1);
 }
 
+/* --- Marquee automático (Home): sin scrollbar, avanza solo --- */
+.gallery--marquee .gallery__viewport {
+	overflow: hidden;
+	width: 100%;
+}
+
+.gallery--marquee .gallery__track {
+	overflow: visible;
+	padding-bottom: 0;
+	width: max-content;
+	animation: gallery-marquee 32s linear infinite;
+}
+
+.gallery--marquee:hover .gallery__track {
+	animation-play-state: paused;
+}
+
+@keyframes gallery-marquee {
+	from { transform: translateX(0); }
+	to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.gallery--marquee .gallery__track {
+		animation: none;
+	}
+}
+
 .marquee {
 	overflow: hidden;
 	border-top: 1px solid var(--black);
@@ -1293,7 +1329,8 @@ body {
 }
 
 .event-card--destacado .event-card__media {
-	aspect-ratio: auto;
+	aspect-ratio: 16 / 9;
+	max-height: 420px;
 	width: 58%;
 	flex-shrink: 0;
 }
