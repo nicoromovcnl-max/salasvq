@@ -12,9 +12,12 @@ if ( empty( $evento ) ) {
 	return;
 }
 
-$color_class = 'tag--' . esc_attr( $evento['categoria']['color'] ?? 'grey' );
+$color_class  = 'tag--' . esc_attr( $evento['categoria']['color'] ?? 'grey' );
+$estado       = $evento['estado'] ?? '';
+$estado_slug  = sanitize_html_class( remove_accents( strtolower( str_replace( ' ', '-', $estado ) ) ) );
+$estado_visible = $estado && 'entradas-disponibles' !== $estado_slug;
 ?>
-<article class="event-card" data-component="event-card">
+<article class="event-card<?php echo 'agotado' === $estado_slug ? ' is-agotado' : ''; ?>" data-component="event-card">
 	<a class="event-card__link" href="<?php echo esc_url( $evento['url'] ); ?>">
 		<div class="event-card__media">
 			<img src="<?php echo esc_url( $evento['imagen'] ); ?>" alt="<?php echo esc_attr( $evento['titulo'] ); ?>" loading="lazy">
@@ -23,6 +26,10 @@ $color_class = 'tag--' . esc_attr( $evento['categoria']['color'] ?? 'grey' );
 				<span class="event-card__day"><?php echo esc_html( $evento['fecha_dia'] ); ?></span>
 				<span class="event-card__month"><?php echo esc_html( $evento['fecha_mes'] ); ?></span>
 			</div>
+
+			<?php if ( $estado_visible ) : ?>
+				<span class="event-card__estado event-card__estado--<?php echo esc_attr( $estado_slug ); ?>"><?php echo esc_html( $estado ); ?></span>
+			<?php endif; ?>
 
 			<span class="tag <?php echo esc_attr( $color_class ); ?>"><?php echo esc_html( $evento['categoria']['label'] ); ?></span>
 		</div>

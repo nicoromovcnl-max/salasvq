@@ -16,6 +16,9 @@ if ( empty( $imagenes ) ) {
 		SALASVQ_URI . '/assets/img/demo/evento-1.svg',
 		SALASVQ_URI . '/assets/img/demo/evento-2.svg',
 		SALASVQ_URI . '/assets/img/demo/evento-3.svg',
+		SALASVQ_URI . '/assets/img/demo/la-sala-1.svg',
+		SALASVQ_URI . '/assets/img/demo/evento-5.svg',
+		SALASVQ_URI . '/assets/img/demo/evento-6.svg',
 	);
 }
 ?>

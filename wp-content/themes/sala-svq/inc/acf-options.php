@@ -461,6 +461,7 @@ function salasvq_get_home_sections( $page_id = null ) {
 		array( 'acf_fc_layout' => 'eventos' ),
 		array( 'acf_fc_layout' => 'la_sala' ),
 		array( 'acf_fc_layout' => 'categorias' ),
+		array( 'acf_fc_layout' => 'galeria' ),
 		array( 'acf_fc_layout' => 'cta' ),
 	);
 }
