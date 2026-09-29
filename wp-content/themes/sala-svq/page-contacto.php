@@ -19,7 +19,7 @@ $maps_query = rawurlencode( $direccion . ', ' . $direccion2 );
 
 	<div class="contacto-cover__copy">
 		<span class="eyebrow">SEVILLA · PUMAREJO</span>
-		<h1 class="contacto-cover__titular">CONTAC<br>TO</h1>
+		<h1 class="contacto-cover__titular">CONTACTO</h1>
 		<p class="lede contacto-cover__texto">Si tienes alguna duda, propuesta, quieres colaborar o simplemente venir a tomar algo, escríbenos. Nos encantará leerte.</p>
 		<span class="mark mark--yellow">SEVILLA SIEMPRE RESPONDE</span>
 		<span class="hand-note">¡escríbenos ya!</span>

@@ -14,6 +14,23 @@ if ( isset( $args ) && is_array( $args ) ) {
 
 $titular    = $section['titular'] ?? 'PROGRAMACIÓN';
 $categorias = salasvq_get_categorias();
+
+// En Home solo se muestran 4: una fila completa, sin dejar una segunda
+// fila con 1-2 tarjetas sueltas y espacio vacío al lado. Se priorizan las
+// 4 categorías del menú principal (Música/Humor/Escena/Sesiones) sobre
+// Impro/Otros, que quedaban delante solo por orden alfabético.
+$orden_preferido = array( 'musica', 'humor', 'escena', 'sesiones' );
+usort(
+	$categorias['items'],
+	function ( $a, $b ) use ( $orden_preferido ) {
+		$pos_a = array_search( $a['slug'], $orden_preferido, true );
+		$pos_b = array_search( $b['slug'], $orden_preferido, true );
+		$pos_a = false === $pos_a ? 99 : $pos_a;
+		$pos_b = false === $pos_b ? 99 : $pos_b;
+		return $pos_a <=> $pos_b;
+	}
+);
+$categorias['items'] = array_slice( $categorias['items'], 0, 4 );
 ?>
 <section class="section categorias" data-component="category-grid">
 	<div class="section__head section__head--simple">
