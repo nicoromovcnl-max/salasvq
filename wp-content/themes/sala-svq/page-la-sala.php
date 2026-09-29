@@ -27,6 +27,17 @@ get_header();
 	<p class="lasala-detalle__texto">El espacio combina una estructura de nave industrial reconvertida con detalles propios: la barra a un lado, el escenario elevado apenas unos centímetros, y una acústica pensada tanto para un trío acústico como para una sesión de vinilos hasta la madrugada.</p>
 </section>
 
+<section class="lasala-palabras" data-component="lasala-palabras">
+	<span class="eyebrow lasala-palabras__eyebrow">02 — LO QUE PASA AQUÍ</span>
+	<ul class="lasala-palabras__lista">
+		<li><a href="/musica/">MÚSICA</a></li>
+		<li><a href="/humor/">HUMOR</a></li>
+		<li><a href="/escena/">ESCENA</a></li>
+		<li><a href="/impro/">IMPRO</a></li>
+		<li><a href="/sesiones/">SESIONES</a></li>
+	</ul>
+</section>
+
 <section class="lasala-gallery" data-component="lasala-gallery">
 	<figure class="lasala-gallery__item lasala-gallery__item--tall">
 		<img src="<?php echo esc_url( salasvq_demo_photo( 'standup-mic-1', 'evento-4.svg' ) ); ?>" alt="Escenario" id="lasala-img-escenario">
@@ -74,20 +85,20 @@ get_header();
 
 <section class="alquiler" data-component="alquiler" id="alquila-la-sala">
 	<div class="alquiler__inner">
-		<div class="section__index">02</div>
+		<div class="section__index">03</div>
 		<h2 class="alquiler__titular">ALQUILA<br>LA SALA</h2>
 
 		<p class="alquiler__pregunta">¿Tienes un proyecto, una presentación,<br>una fiesta o un evento?</p>
 		<p class="alquiler__texto">Sala SVQ también puede convertirse en tu espacio.</p>
 
 		<ul class="alquiler__lista">
-			<li>Eventos privados</li>
 			<li>Conciertos</li>
+			<li>Eventos privados</li>
 			<li>Presentaciones</li>
 			<li>Rodajes</li>
 			<li>Sesiones</li>
 			<li>Fiestas</li>
-			<li>Encuentros de empresa</li>
+			<li>Empresas</li>
 			<li>Actividades culturales</li>
 		</ul>
 

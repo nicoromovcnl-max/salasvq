@@ -1961,6 +1961,51 @@ body::before {
 	margin-top: 1em;
 }
 
+.lasala-palabras {
+	max-width: var(--container);
+	margin: clamp(3rem, 7vw, 5rem) auto;
+	padding: 0 var(--gutter);
+	border-top: 1px solid var(--black);
+	border-bottom: 1px solid var(--black);
+}
+
+.lasala-palabras__eyebrow {
+	display: block;
+	padding: 1.25rem 0 0;
+	opacity: 0.55;
+}
+
+.lasala-palabras__lista {
+	padding: 0.5rem 0 1.5rem;
+}
+
+.lasala-palabras__lista li {
+	border-top: 1px solid rgba(23, 21, 18, 0.12);
+}
+
+.lasala-palabras__lista li:first-child {
+	border-top: none;
+}
+
+.lasala-palabras__lista a {
+	display: block;
+	font-family: var(--font-display);
+	font-size: clamp(2.6rem, 9vw, 7rem);
+	line-height: 1.05;
+	text-transform: uppercase;
+	padding: 0.05em 0;
+	transition: padding-left 0.35s var(--ease), color 0.35s var(--ease);
+}
+
+.lasala-palabras__lista a:hover,
+.lasala-palabras__lista a:focus-visible {
+	padding-left: 0.35em;
+	color: var(--yellow);
+}
+
+.lasala-palabras__lista li:nth-child(2) a { text-align: right; }
+.lasala-palabras__lista li:nth-child(4) a { text-align: right; }
+
 .lasala-gallery {
 	max-width: var(--container);
 	margin: clamp(2rem, 5vw, 3.5rem) auto;
@@ -2614,6 +2659,11 @@ body::before {
 
 	.event-row__meta {
 		flex-wrap: wrap;
+	}
+
+	.lasala-palabras__lista li:nth-child(2) a,
+	.lasala-palabras__lista li:nth-child(4) a {
+		text-align: left;
 	}
 
 	.event-grid,
