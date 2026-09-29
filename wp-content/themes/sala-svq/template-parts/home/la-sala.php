@@ -16,8 +16,8 @@ $titular   = $section['titular'] ?? "LA\nSALA";
 $texto     = $section['texto'] ?? 'Un espacio cultural en el corazón de Sevilla donde la música, el humor, la improvisación y las artes escénicas conviven sin demasiadas reglas.';
 $cta_texto = $section['cta_texto'] ?? 'Conoce la sala';
 $cta_url   = ! empty( $section['cta_url'] ) ? $section['cta_url'] : home_url( '/la-sala/' );
-$imagen    = ! empty( $section['imagen'] ) ? $section['imagen'] : SALASVQ_URI . '/assets/img/demo/la-sala-2.svg';
-$imagen2   = ! empty( $section['imagen_secundaria'] ) ? $section['imagen_secundaria'] : SALASVQ_URI . '/assets/img/demo/la-sala-1.svg';
+$imagen    = ! empty( $section['imagen'] ) ? $section['imagen'] : salasvq_demo_photo( 'band-stage-1', 'la-sala-2.svg' );
+$imagen2   = ! empty( $section['imagen_secundaria'] ) ? $section['imagen_secundaria'] : salasvq_demo_photo( 'crowd-hands-1', 'la-sala-1.svg' );
 $lineas    = array_filter( array_map( 'trim', explode( "\n", $titular ) ) );
 ?>
 <section class="section la-sala" data-component="image-text-section">

@@ -18,7 +18,7 @@ $titular  = $section['titular'] ?? "MÚSICA\nHUMOR\nESCENA";
 $texto    = $section['texto'] ?? 'Un espacio cercano y sin filtros para la música, el humor, la improvisación y otras formas de encuentro en el corazón de Sevilla.';
 $cta_texto = $section['cta_texto'] ?? 'Ver agenda';
 $cta_url   = ! empty( $section['cta_url'] ) ? $section['cta_url'] : home_url( '/agenda/' );
-$imagen    = ! empty( $section['imagen'] ) ? $section['imagen'] : SALASVQ_URI . '/assets/img/demo/hero.svg';
+$imagen    = ! empty( $section['imagen'] ) ? $section['imagen'] : salasvq_demo_photo( 'dj-turntable-1', 'hero.svg' );
 $sello     = $section['sello_texto'] ?? 'SALA SVQ · SEVILLA · PUMAREJO';
 
 $lineas = array_filter( array_map( 'trim', explode( "\n", $titular ) ) );

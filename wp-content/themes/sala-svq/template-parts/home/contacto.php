@@ -14,7 +14,7 @@ if ( isset( $args ) && is_array( $args ) ) {
 
 $titular = $section['titular'] ?? 'CONTACTO';
 $texto   = $section['texto'] ?? 'Si tienes alguna duda, propuesta, quieres colaborar o simplemente venir a tomar algo, escríbenos. Nos encantará leerte.';
-$imagen  = ! empty( $section['imagen'] ) ? $section['imagen'] : SALASVQ_URI . '/assets/img/demo/contacto.svg';
+$imagen  = ! empty( $section['imagen'] ) ? $section['imagen'] : salasvq_demo_photo( 'bar-interior-2', 'contacto.svg' );
 
 $direccion = salasvq_option( 'direccion_linea1', 'C. Aniceto Sáenz, 1' ) . ', ' . salasvq_option( 'direccion_linea2', '41003 Sevilla' );
 $referencia = salasvq_option( 'direccion_referencia', 'Junto a la Plaza del Pumarejo' );

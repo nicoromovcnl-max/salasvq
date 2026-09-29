@@ -17,12 +17,12 @@ $imagenes = ! empty( $section['imagenes'] ) ? $section['imagenes'] : array();
 
 if ( empty( $imagenes ) ) {
 	$imagenes = array(
-		SALASVQ_URI . '/assets/img/demo/evento-1.svg',
-		SALASVQ_URI . '/assets/img/demo/evento-2.svg',
-		SALASVQ_URI . '/assets/img/demo/evento-3.svg',
-		SALASVQ_URI . '/assets/img/demo/la-sala-1.svg',
-		SALASVQ_URI . '/assets/img/demo/evento-5.svg',
-		SALASVQ_URI . '/assets/img/demo/evento-6.svg',
+		salasvq_demo_photo( 'concert-lights-2', 'evento-1.svg' ),
+		salasvq_demo_photo( 'mic-closeup-1', 'evento-2.svg' ),
+		salasvq_demo_photo( 'vinyl-shelf-1', 'evento-3.svg' ),
+		salasvq_demo_photo( 'crowd-silhouette-1', 'la-sala-1.svg' ),
+		salasvq_demo_photo( 'guitar-player-1', 'evento-5.svg' ),
+		salasvq_demo_photo( 'headphones-1', 'evento-6.svg' ),
 	);
 }
 ?>
