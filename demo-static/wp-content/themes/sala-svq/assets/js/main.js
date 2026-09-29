@@ -9,6 +9,7 @@
 		toggle.addEventListener("click", function () {
 			var isOpen = nav.classList.toggle("is-open");
 			toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+			document.body.classList.toggle("has-mobile-nav-open", isOpen);
 		});
 	}
 
@@ -21,21 +22,46 @@
 
 			var items = grid.querySelectorAll(".event-grid__item, .agenda-cartelera__item");
 			var buttons = bar.querySelectorAll("[data-filter]");
+			var isAgenda = grid.closest(".agenda-list") !== null;
+
+			function applyFilter(filter, updateUrl) {
+				var target = null;
+				buttons.forEach(function (b) {
+					var match = b.getAttribute("data-filter") === filter;
+					b.classList.toggle("is-active", match);
+					if (match) target = b;
+				});
+				if (!target) return;
+
+				items.forEach(function (item) {
+					var match = filter === "todos" || item.getAttribute("data-category") === filter;
+					item.hidden = !match;
+				});
+				bar.dispatchEvent(new CustomEvent("filterchange"));
+
+				if (updateUrl && isAgenda && window.history && window.history.replaceState) {
+					var url = new URL(window.location.href);
+					if (filter === "todos") {
+						url.searchParams.delete("cat");
+					} else {
+						url.searchParams.set("cat", filter);
+					}
+					window.history.replaceState(null, "", url);
+				}
+			}
 
 			buttons.forEach(function (button) {
 				button.addEventListener("click", function () {
-					var filter = button.getAttribute("data-filter");
-
-					buttons.forEach(function (b) {
-						b.classList.toggle("is-active", b === button);
-					});
-
-					items.forEach(function (item) {
-						var match = filter === "todos" || item.getAttribute("data-category") === filter;
-						item.hidden = !match;
-					});
+					applyFilter(button.getAttribute("data-filter"), true);
 				});
 			});
+
+			if (isAgenda) {
+				var initial = new URLSearchParams(window.location.search).get("cat");
+				if (initial && bar.querySelector('[data-filter="' + initial + '"]')) {
+					applyFilter(initial, false);
+				}
+			}
 		});
 	}
 
@@ -398,9 +424,63 @@
 		}, 4500);
 	}
 
+	// Preselecciona "Tipo de consulta" en el formulario de contacto cuando
+	// se llega con ?asunto=alquiler (enlace desde "Alquila la sala").
+	function initContactoAsunto() {
+		var select = document.getElementById("c-asunto");
+		if (!select) return;
+		var params = new URLSearchParams(window.location.search);
+		var asunto = params.get("asunto");
+		if (asunto && select.querySelector('option[value="' + asunto + '"]')) {
+			select.value = asunto;
+		}
+	}
+
+	// Estado vacío cuando un filtro de Agenda no tiene eventos.
+	function initEmptyFilterState() {
+		var bars = document.querySelectorAll("[data-filter-bar]");
+		bars.forEach(function (bar) {
+			var section = bar.closest("section");
+			var grid = section && section.querySelector("[data-events-grid]");
+			if (!grid) return;
+			var empty = document.createElement("p");
+			empty.className = "agenda-empty-state";
+			empty.hidden = true;
+			empty.textContent = "No hay eventos en esta categoría por ahora. Vuelve pronto o consulta \"Todos\".";
+			grid.insertAdjacentElement("afterend", empty);
+			bar.addEventListener("filterchange", function () {
+				var visible = grid.querySelectorAll(
+					".event-grid__item:not([hidden]), .agenda-cartelera__item:not([hidden])"
+				);
+				empty.hidden = visible.length > 0;
+			});
+		});
+	}
+
+	// Barra de compra fija en móvil (Single Evento): aparece cuando el CTA
+	// original de la ficha sale de la pantalla al hacer scroll.
+	function initStickyBuy() {
+		var cta = document.querySelector("[data-buy-cta]");
+		var sticky = document.querySelector("[data-sticky-buy]");
+		if (!cta || !sticky || !("IntersectionObserver" in window)) return;
+
+		var observer = new IntersectionObserver(
+			function (entries) {
+				entries.forEach(function (entry) {
+					sticky.hidden = entry.isIntersecting;
+				});
+			},
+			{ threshold: 0 }
+		);
+		observer.observe(cta);
+	}
+
 	document.addEventListener("DOMContentLoaded", function () {
 		initMobileMenu();
 		initFilterBar();
+		initEmptyFilterState();
+		initContactoAsunto();
+		initStickyBuy();
 		initRevealOnLoad();
 		initImageTilt();
 		initCursorLabel();
