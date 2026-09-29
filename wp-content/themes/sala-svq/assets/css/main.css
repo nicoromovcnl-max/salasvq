@@ -690,6 +690,41 @@ body::before {
 	left: 0.75rem;
 }
 
+.event-card__estado {
+	position: absolute;
+	top: 0.75rem;
+	right: 0.75rem;
+	background: var(--paper);
+	border: 1px solid var(--black);
+	padding: 0.35em 0.6em;
+	font-size: var(--fs-small);
+	font-weight: 700;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	line-height: 1;
+}
+
+.event-card__estado--agotado {
+	background: var(--black);
+	color: var(--paper);
+	border-color: var(--black);
+}
+
+.event-card__estado--proximamente {
+	background: transparent;
+	color: var(--paper);
+	border-color: var(--paper);
+}
+
+.event-card.is-agotado .event-card__media img {
+	filter: grayscale(1) contrast(1.05) brightness(0.55);
+}
+
+.event-card.is-agotado:hover .event-card__media img {
+	transform: none;
+	filter: grayscale(1) contrast(1.05) brightness(0.55);
+}
+
 .event-card__body {
 	padding: 1.1rem 1.1rem 1.3rem;
 	flex: 1;
