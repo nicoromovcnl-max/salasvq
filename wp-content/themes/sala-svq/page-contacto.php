@@ -12,8 +12,9 @@ $maps_query = rawurlencode( $direccion . ', ' . $direccion2 );
 ?>
 
 <section class="contacto-cover" data-component="contacto-hero">
-	<div class="contacto-cover__media">
+	<div class="contacto-cover__media cutout-frame">
 		<img src="<?php echo esc_url( salasvq_demo_photo( 'bar-interior-2', 'la-sala-1.svg' ) ); ?>" alt="Fachada de Sala SVQ">
+		<span class="tape-mark tape-mark--top" aria-hidden="true"></span>
 	</div>
 
 	<div class="contacto-cover__copy">
@@ -21,6 +22,7 @@ $maps_query = rawurlencode( $direccion . ', ' . $direccion2 );
 		<h1 class="contacto-cover__titular">CONTAC<br>TO</h1>
 		<p class="lede contacto-cover__texto">Si tienes alguna duda, propuesta, quieres colaborar o simplemente venir a tomar algo, escríbenos. Nos encantará leerte.</p>
 		<span class="mark mark--yellow">SEVILLA SIEMPRE RESPONDE</span>
+		<span class="hand-note">¡escríbenos ya!</span>
 	</div>
 
 	<span class="contacto-cover__stamp" aria-hidden="true">37.397° N, 5.987° W</span>
@@ -51,7 +53,7 @@ $maps_query = rawurlencode( $direccion . ', ' . $direccion2 );
 	<div class="contacto-mapa__label">
 		<span class="eyebrow">CÓMO LLEGAR</span>
 	</div>
-	<div class="contacto-mapa__frame">
+	<div class="contacto-mapa__frame cutout-frame">
 		<iframe
 			src="https://www.google.com/maps?q=<?php echo esc_attr( $maps_query ); ?>&output=embed"
 			width="100%" height="100%" style="border:0;filter:grayscale(1) contrast(1.15);" loading="lazy"

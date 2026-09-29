@@ -225,7 +225,9 @@
 		// contenido invisible.
 		window.setTimeout(function () {
 			document.querySelectorAll(
-				".event-grid > *, .agenda-cartelera > *, .category-grid > *, .lasala-gallery > *, .gallery__track > *"
+				".event-grid > *, .agenda-cartelera > *, .category-grid > *, .lasala-gallery > *, .gallery__track > *, " +
+				".hero__titular-line, .section__titular span, .cta-strip__titular span, .evento-poster__titular span, " +
+				".lasala-palabras__lista li, .cat-hero__titular, .contacto-cover__titular"
 			).forEach(function (el) {
 				el.style.opacity = "1";
 				el.style.transform = "none";
