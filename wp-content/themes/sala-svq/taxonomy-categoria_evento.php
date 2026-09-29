@@ -33,7 +33,7 @@ $resto       = array_slice( $eventos_cat['items'], 1, 6 );
 ?>
 
 <section class="cat-hero cat-hero--<?php echo esc_attr( $variant ); ?> tag--<?php echo esc_attr( $color ); ?>" data-component="cat-hero">
-	<span class="cat-hero__index"><?php echo esc_html( mb_strtoupper( $slug ) ); ?></span>
+	<span class="cat-hero__index"><?php echo esc_html( mb_strtoupper( $term->name ) ); ?></span>
 	<h1 class="cat-hero__titular"><?php echo esc_html( mb_strtoupper( $term->name ) ); ?></h1>
 	<?php if ( 'impro' === $variant ) : ?>
 		<span class="cat-hero__stamp" aria-hidden="true">IMPROVISADO EN DIRECTO</span>

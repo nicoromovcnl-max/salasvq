@@ -85,7 +85,7 @@ get_header();
 		<div class="lasala-datos__item">
 			<span class="lasala-datos__num" aria-hidden="true">03</span>
 			<span class="lasala-datos__label">Ubicación</span>
-			<p class="lasala-datos__desc">C. Aniceto Sáenz, 1 — junto a la Plaza del Pumarejo, a 10 min de la Alameda.</p>
+			<p class="lasala-datos__desc">C. Aniceto Sáenz, 1 — junto a la Plaza del Pumarejo, a 10 min de la Alameda.<br><a href="/contacto/#como-llegar" class="lasala-datos__link">Ver mapa y cómo llegar →</a></p>
 		</div>
 		<div class="lasala-datos__item">
 			<span class="lasala-datos__num" aria-hidden="true">04</span>

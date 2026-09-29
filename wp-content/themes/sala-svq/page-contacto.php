@@ -49,7 +49,7 @@ $maps_query = rawurlencode( $direccion . ', ' . $direccion2 );
 	</div>
 </section>
 
-<section class="contacto-mapa" data-component="contacto-mapa">
+<section class="contacto-mapa" data-component="contacto-mapa" id="como-llegar">
 	<div class="contacto-mapa__label">
 		<span class="eyebrow">CÓMO LLEGAR</span>
 	</div>

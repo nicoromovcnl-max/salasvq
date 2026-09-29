@@ -52,9 +52,9 @@ $logo         = salasvq_option( 'logo', '' );
 				<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg>
 			</a>
 
-			<button class="site-header__icon-btn" type="button" aria-label="Buscar">
+			<a class="site-header__icon-btn" href="<?php echo esc_url( home_url( '/agenda/' ) ); ?>" aria-label="Buscar eventos en la agenda">
 				<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M16 16l-3.5-3.5" stroke="currentColor" stroke-width="1.5"/></svg>
-			</button>
+			</a>
 
 			<button class="site-header__burger" type="button" aria-label="Abrir menú" aria-expanded="false" data-menu-toggle>
 				<span></span><span></span><span></span>

@@ -67,11 +67,25 @@ $youtube  = salasvq_option( 'url_youtube', '#' );
 	<div class="site-footer__bottom">
 		<p>© <?php echo esc_html( gmdate( 'Y' ) ); ?> Sala SVQ. Todos los derechos reservados.</p>
 
-		<div class="site-footer__social">
-			<a href="<?php echo esc_url( $ig ); ?>" aria-label="Instagram" target="_blank" rel="noopener">IG</a>
-			<a href="<?php echo esc_url( $tiktok ); ?>" aria-label="TikTok" target="_blank" rel="noopener">TT</a>
-			<a href="<?php echo esc_url( $spotify ); ?>" aria-label="Spotify" target="_blank" rel="noopener">SP</a>
-			<a href="<?php echo esc_url( $youtube ); ?>" aria-label="YouTube" target="_blank" rel="noopener">YT</a>
-		</div>
+		<?php
+		// Solo se muestra cada red si hay una URL real configurada: un icono
+		// que enlaza a "#" es peor que no mostrarlo.
+		$redes = array(
+			'Instagram' => array( 'url' => $ig, 'label' => 'IG' ),
+			'TikTok'    => array( 'url' => $tiktok, 'label' => 'TT' ),
+			'Spotify'   => array( 'url' => $spotify, 'label' => 'SP' ),
+			'YouTube'   => array( 'url' => $youtube, 'label' => 'YT' ),
+		);
+		$redes_activas = array_filter( $redes, function ( $red ) {
+			return ! empty( $red['url'] ) && '#' !== $red['url'];
+		} );
+		?>
+		<?php if ( ! empty( $redes_activas ) ) : ?>
+			<div class="site-footer__social">
+				<?php foreach ( $redes_activas as $nombre => $red ) : ?>
+					<a href="<?php echo esc_url( $red['url'] ); ?>" aria-label="<?php echo esc_attr( $nombre ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $red['label'] ); ?></a>
+				<?php endforeach; ?>
+			</div>
+		<?php endif; ?>
 	</div>
 </footer>

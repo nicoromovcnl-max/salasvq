@@ -75,11 +75,19 @@ while ( have_posts() ) :
 				<span class="meta-mono">SALA</span>
 				<p>Sala SVQ<br><span class="evento-poster__muted">C. Aniceto Sáenz, 1</span></p>
 			</div>
-			<a class="btn btn--yellow evento-poster__cta" href="<?php echo esc_url( $entradas_url ); ?>">
+			<a class="btn btn--yellow evento-poster__cta" data-buy-cta href="<?php echo esc_url( $entradas_url ); ?>">
 				<span>Comprar entradas</span>
 				<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h11M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg>
 			</a>
 		</section>
+
+		<div class="evento-poster__sticky-buy" data-sticky-buy hidden>
+			<span class="evento-poster__sticky-buy-precio"><?php echo esc_html( $evento['precio'] ?: $evento['titulo'] ); ?></span>
+			<a class="btn btn--yellow" href="<?php echo esc_url( $entradas_url ); ?>">
+				<span>Comprar entradas</span>
+				<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h11M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg>
+			</a>
+		</div>
 
 		<section class="section evento-poster__spread">
 			<div class="evento-poster__col-texto">
