@@ -20,18 +20,28 @@ $editoriales = array(
 );
 $editorial = $editoriales[ $slug ] ?? $term->description;
 
+/**
+ * Personalidad por categoría: mismo sistema de diseño, distinta sensación.
+ * musica = dinámica, humor = gráfica, escena = teatral/editorial,
+ * sesiones = nocturna, impro = con sello rotado.
+ */
+$variant = in_array( $slug, array( 'musica', 'humor', 'escena', 'sesiones', 'impro' ), true ) ? $slug : 'otros';
+
 $eventos_cat = salasvq_get_eventos( array( 'limit' => 7, 'categoria_slug' => $slug ) );
 $destacado   = $eventos_cat['items'][0] ?? null;
 $resto       = array_slice( $eventos_cat['items'], 1, 6 );
 ?>
 
-<section class="cat-hero tag--<?php echo esc_attr( $color ); ?>" data-component="cat-hero">
+<section class="cat-hero cat-hero--<?php echo esc_attr( $variant ); ?> tag--<?php echo esc_attr( $color ); ?>" data-component="cat-hero">
 	<span class="cat-hero__index"><?php echo esc_html( mb_strtoupper( $slug ) ); ?></span>
 	<h1 class="cat-hero__titular"><?php echo esc_html( mb_strtoupper( $term->name ) ); ?></h1>
+	<?php if ( 'impro' === $variant ) : ?>
+		<span class="cat-hero__stamp" aria-hidden="true">IMPROVISADO EN DIRECTO</span>
+	<?php endif; ?>
 </section>
 
 <?php if ( $destacado ) : ?>
-<section class="section cat-destacado" data-component="cat-destacado">
+<section class="section cat-destacado cat-destacado--<?php echo esc_attr( $variant ); ?>" data-component="cat-destacado">
 	<div class="section__index">01</div>
 	<h2 class="section__titular section__titular--tight"><span>PRÓXIMO</span><span>DESTACADO</span></h2>
 
@@ -69,10 +79,10 @@ $resto       = array_slice( $eventos_cat['items'], 1, 6 );
 </section>
 <?php endif; ?>
 
-<section class="section cat-editorial">
+<section class="section cat-editorial cat-editorial--<?php echo esc_attr( $variant ); ?>">
 	<div class="section__index">03</div>
 	<h2 class="section__titular section__titular--tight"><span>SOBRE</span><span><?php echo esc_html( mb_strtoupper( $term->name ) ); ?></span></h2>
-	<p class="cat-editorial__texto"><?php echo esc_html( $editorial ); ?></p>
+	<p class="cat-editorial__texto <?php echo 'escena' === $variant ? 'lede' : ''; ?>"><?php echo esc_html( $editorial ); ?></p>
 </section>
 
 <section class="section gallery" data-component="gallery">

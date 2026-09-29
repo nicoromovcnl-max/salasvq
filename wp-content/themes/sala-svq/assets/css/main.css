@@ -2360,6 +2360,90 @@ body::before {
 	align-items: center;
 }
 
+/* --- Variantes de personalidad por categoría --- */
+.cat-hero__stamp {
+	position: absolute;
+	margin-top: 1rem;
+	font-size: var(--fs-small);
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	opacity: 0.6;
+	transform: rotate(-3deg);
+}
+
+.cat-hero--musica .cat-hero__titular {
+	letter-spacing: -0.01em;
+	transform: skewX(-2deg);
+}
+
+.cat-hero--sesiones {
+	background: var(--black) !important;
+	color: var(--paper) !important;
+}
+
+.cat-hero--sesiones .cat-hero__index {
+	color: var(--yellow);
+	opacity: 1;
+}
+
+.cat-hero--humor .cat-hero__titular {
+	display: inline-block;
+	background: var(--black);
+	color: var(--paper);
+	padding: 0 0.15em;
+	transform: rotate(-1deg);
+}
+
+.cat-destacado--musica .cat-destacado__card {
+	grid-template-columns: 1.2fr 0.8fr;
+}
+
+.cat-destacado--musica .cat-destacado__media {
+	order: 2;
+	aspect-ratio: 3 / 4;
+}
+
+.cat-destacado--humor .cat-destacado__media {
+	position: relative;
+	transform: rotate(-1.5deg);
+	box-shadow: 10px 10px 0 var(--black);
+	margin: 0.5rem;
+}
+
+.cat-destacado--escena .cat-destacado__titulo {
+	font-style: italic;
+}
+
+.cat-destacado--sesiones {
+	background: var(--black);
+	color: var(--paper);
+}
+
+.cat-destacado--sesiones .cat-destacado__media {
+	filter: brightness(0.9);
+}
+
+.cat-destacado--sesiones .cat-destacado__fecha,
+.cat-destacado--sesiones .section__index {
+	color: var(--yellow);
+	opacity: 1;
+}
+
+.cat-editorial--escena .cat-editorial__texto {
+	max-width: 52ch;
+	font-size: var(--fs-display-sm);
+}
+
+.cat-editorial--sesiones {
+	background: var(--black);
+	color: var(--paper);
+}
+
+.cat-editorial--sesiones .section__index,
+.cat-editorial--sesiones .section__titular {
+	color: var(--paper);
+}
+
 .cat-destacado__media {
 	aspect-ratio: 4 / 3;
 	overflow: hidden;
