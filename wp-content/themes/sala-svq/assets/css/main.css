@@ -2387,7 +2387,19 @@ body::before {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: clamp(1.5rem, 3vw, 3rem);
-	align-items: center;
+	align-items: stretch;
+}
+
+.cat-destacado__body {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.cat-destacado__lugar {
+	margin-top: auto;
+	padding-top: 1.5rem;
+	opacity: 0.45;
 }
 
 /* --- Variantes de personalidad por categoría --- */
@@ -2475,7 +2487,7 @@ body::before {
 }
 
 .cat-destacado__media {
-	aspect-ratio: 4 / 3;
+	aspect-ratio: 16 / 11;
 	overflow: hidden;
 	background: var(--black);
 }

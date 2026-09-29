@@ -58,6 +58,7 @@ $resto       = array_slice( $eventos_cat['items'], 1, 6 );
 				<span>Ver evento</span>
 				<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h11M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg>
 			</a>
+			<p class="cat-destacado__lugar meta-mono">SALA SVQ · C. ANICETO SÁENZ, 1 · SEVILLA</p>
 		</div>
 	</article>
 </section>
@@ -85,13 +86,34 @@ $resto       = array_slice( $eventos_cat['items'], 1, 6 );
 	<p class="cat-editorial__texto <?php echo 'escena' === $variant ? 'lede' : ''; ?>"><?php echo esc_html( $editorial ); ?></p>
 </section>
 
+<?php
+$galeria_fotos = wp_list_pluck( array_slice( $eventos_cat['items'], 0, 6 ), 'imagen' );
+if ( count( $galeria_fotos ) < 3 ) {
+	$relleno = array(
+		salasvq_demo_photo( 'bar-interior-1', 'la-sala-2.svg' ),
+		salasvq_demo_photo( 'standup-mic-1', 'evento-4.svg' ),
+		salasvq_demo_photo( 'crowd-hands-1', 'la-sala-1.svg' ),
+	);
+	foreach ( $relleno as $foto ) {
+		if ( count( $galeria_fotos ) >= 3 && count( $galeria_fotos ) >= count( $eventos_cat['items'] ) ) {
+			break;
+		}
+		if ( ! in_array( $foto, $galeria_fotos, true ) ) {
+			$galeria_fotos[] = $foto;
+		}
+		if ( count( $galeria_fotos ) >= 3 ) {
+			break;
+		}
+	}
+}
+?>
 <section class="section gallery" data-component="gallery">
 	<div class="section__head section__head--simple">
 		<h2 class="section__titular section__titular--inline">GALERÍA</h2>
 	</div>
 	<div class="gallery__track">
-		<?php foreach ( array_slice( $eventos_cat['items'], 0, 6 ) as $g ) : ?>
-			<figure class="gallery__item"><img src="<?php echo esc_url( $g['imagen'] ); ?>" alt="" loading="lazy"></figure>
+		<?php foreach ( $galeria_fotos as $foto ) : ?>
+			<figure class="gallery__item"><img src="<?php echo esc_url( $foto ); ?>" alt="" loading="lazy"></figure>
 		<?php endforeach; ?>
 	</div>
 </section>
