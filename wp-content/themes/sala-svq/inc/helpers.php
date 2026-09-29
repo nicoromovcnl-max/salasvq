@@ -12,6 +12,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Fotografía demo por slug: si existe un adjunto real en la biblioteca de
+ * medios con ese slug (importado durante la puesta en marcha del sitio),
+ * lo usa; si no, cae a la ilustración SVG generada del theme. Así las
+ * plantillas de contenido fijo (La Sala, etc.) pueden pedir "una foto de
+ * X" sin acoplarse a si hoy existe una foto real o solo el placeholder.
+ */
+function salasvq_demo_photo( $slug, $fallback_svg ) {
+	$attachments = get_posts(
+		array(
+			'name'           => $slug,
+			'post_type'      => 'attachment',
+			'post_status'    => 'inherit',
+			'posts_per_page' => 1,
+		)
+	);
+	if ( ! empty( $attachments ) ) {
+		return wp_get_attachment_url( $attachments[0]->ID );
+	}
+	return SALASVQ_URI . '/assets/img/demo/' . $fallback_svg;
+}
+
+/**
  * Categorías demo (label + color) usadas si aún no existen términos reales.
  */
 function salasvq_demo_categorias() {
@@ -254,7 +276,7 @@ function salasvq_get_categorias() {
 			'label'       => $term->name,
 			'color'       => get_term_meta( $term->term_id, 'color', true ) ?: 'grey',
 			'descripcion' => get_term_meta( $term->term_id, 'descripcion_categoria', true ) ?: $term->description,
-			'imagen'      => get_term_meta( $term->term_id, 'imagen_categoria', true ) ?: ( SALASVQ_URI . '/assets/img/demo/cat-' . $term->slug . '.jpg' ),
+			'imagen'      => get_term_meta( $term->term_id, 'imagen_categoria', true ) ?: ( SALASVQ_URI . '/assets/img/demo/cat-' . $term->slug . '.svg' ),
 			'url'         => get_term_link( $term ),
 		);
 	}

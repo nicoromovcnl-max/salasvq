@@ -11,7 +11,7 @@ get_header();
 
 <section class="lasala-hero" data-component="lasala-hero">
 	<div class="lasala-hero__media">
-		<img src="<?php echo esc_url( SALASVQ_URI . '/assets/img/demo/la-sala-1.svg' ); ?>" alt="" id="lasala-hero-img">
+		<img src="<?php echo esc_url( salasvq_demo_photo( 'bar-interior-2', 'la-sala-1.svg' ) ); ?>" alt="" id="lasala-hero-img">
 	</div>
 	<div class="lasala-hero__copy">
 		<span class="mark mark--yellow">SALA SVQ · SEVILLA</span>
@@ -29,23 +29,23 @@ get_header();
 
 <section class="lasala-gallery" data-component="lasala-gallery">
 	<figure class="lasala-gallery__item lasala-gallery__item--tall">
-		<img src="<?php echo esc_url( SALASVQ_URI . '/assets/img/demo/evento-4.svg' ); ?>" alt="Escenario" id="lasala-img-escenario">
+		<img src="<?php echo esc_url( salasvq_demo_photo( 'standup-mic-1', 'evento-4.svg' ) ); ?>" alt="Escenario" id="lasala-img-escenario">
 		<figcaption>Escenario</figcaption>
 	</figure>
 	<figure class="lasala-gallery__item">
-		<img src="<?php echo esc_url( SALASVQ_URI . '/assets/img/demo/la-sala-1.svg' ); ?>" alt="Público" id="lasala-img-publico">
+		<img src="<?php echo esc_url( salasvq_demo_photo( 'crowd-hands-1', 'la-sala-1.svg' ) ); ?>" alt="Público" id="lasala-img-publico">
 		<figcaption>Público</figcaption>
 	</figure>
 	<figure class="lasala-gallery__item">
-		<img src="<?php echo esc_url( SALASVQ_URI . '/assets/img/demo/evento-3.svg' ); ?>" alt="Barra" id="lasala-img-barra">
+		<img src="<?php echo esc_url( salasvq_demo_photo( 'venue-empty-1', 'evento-3.svg' ) ); ?>" alt="Barra" id="lasala-img-barra">
 		<figcaption>Barra</figcaption>
 	</figure>
 	<figure class="lasala-gallery__item lasala-gallery__item--wide">
-		<img src="<?php echo esc_url( SALASVQ_URI . '/assets/img/demo/la-sala-2.svg' ); ?>" alt="Interior" id="lasala-img-interior">
+		<img src="<?php echo esc_url( salasvq_demo_photo( 'bar-interior-1', 'la-sala-2.svg' ) ); ?>" alt="Interior" id="lasala-img-interior">
 		<figcaption>Interior</figcaption>
 	</figure>
 	<figure class="lasala-gallery__item">
-		<img src="<?php echo esc_url( SALASVQ_URI . '/assets/img/demo/evento-2.svg' ); ?>" alt="Detalle" id="lasala-img-detalle">
+		<img src="<?php echo esc_url( salasvq_demo_photo( 'neon-sign-1', 'evento-2.svg' ) ); ?>" alt="Detalle" id="lasala-img-detalle">
 		<figcaption>Detalle</figcaption>
 	</figure>
 </section>
