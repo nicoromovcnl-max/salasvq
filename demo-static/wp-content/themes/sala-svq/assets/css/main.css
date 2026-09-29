@@ -1853,10 +1853,13 @@ body {
 
 .contacto-cover__titular {
 	font-family: var(--font-display);
-	font-size: var(--fs-display-xl);
+	/* "CONTACTO" es más largo que "LA SALA"/"AGENDA": tamaño propio para
+	   que quepa en una sola línea sin partir la palabra por la mitad. */
+	font-size: clamp(2.6rem, 8vw, 6.5rem);
 	text-transform: uppercase;
-	line-height: 0.82;
+	line-height: 0.9;
 	margin: 0.75rem 0 1.25rem;
+	white-space: nowrap;
 }
 
 .contacto-cover__texto {
