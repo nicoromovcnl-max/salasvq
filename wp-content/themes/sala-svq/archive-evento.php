@@ -28,7 +28,7 @@ $filtros = array_merge(
 		<p class="agenda-hero__texto">Conciertos, monólogos, improvisación y otras propuestas culturales en el corazón de Sevilla.</p>
 	</div>
 	<div class="agenda-hero__media">
-		<img src="<?php echo esc_url( salasvq_demo_photo( 'concert-lights-2', 'la-sala-1.svg' ) ); ?>" alt="">
+		<img src="<?php echo esc_url( salasvq_demo_photo( 'bar-interior-2', 'la-sala-1.svg' ) ); ?>" alt="">
 	</div>
 </section>
 

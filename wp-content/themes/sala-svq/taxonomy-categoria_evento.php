@@ -92,7 +92,7 @@ if ( count( $galeria_fotos ) < 3 ) {
 	$relleno = array(
 		salasvq_demo_photo( 'bar-interior-1', 'la-sala-2.svg' ),
 		salasvq_demo_photo( 'standup-mic-1', 'evento-4.svg' ),
-		salasvq_demo_photo( 'crowd-hands-1', 'la-sala-1.svg' ),
+		salasvq_demo_photo( 'venue-empty-1', 'la-sala-1.svg' ),
 	);
 	foreach ( $relleno as $foto ) {
 		if ( count( $galeria_fotos ) >= 3 && count( $galeria_fotos ) >= count( $eventos_cat['items'] ) ) {

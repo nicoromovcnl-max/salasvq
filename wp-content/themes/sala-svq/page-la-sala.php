@@ -44,7 +44,7 @@ get_header();
 		<figcaption>Escenario</figcaption>
 	</figure>
 	<figure class="lasala-gallery__item">
-		<img src="<?php echo esc_url( salasvq_demo_photo( 'crowd-hands-1', 'la-sala-1.svg' ) ); ?>" alt="Público" id="lasala-img-publico">
+		<img src="<?php echo esc_url( salasvq_demo_photo( 'concert-crowd-1', 'la-sala-1.svg' ) ); ?>" alt="Público" id="lasala-img-publico">
 		<figcaption>Público</figcaption>
 	</figure>
 	<figure class="lasala-gallery__item">

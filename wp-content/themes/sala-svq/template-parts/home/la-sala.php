@@ -16,14 +16,13 @@ $titular   = $section['titular'] ?? "LA\nSALA";
 $texto     = $section['texto'] ?? 'Un espacio cultural en el corazón de Sevilla donde la música, el humor, la improvisación y las artes escénicas conviven sin demasiadas reglas.';
 $cta_texto = $section['cta_texto'] ?? 'Conoce la sala';
 $cta_url   = ! empty( $section['cta_url'] ) ? $section['cta_url'] : home_url( '/la-sala/' );
-$imagen    = ! empty( $section['imagen'] ) ? $section['imagen'] : salasvq_demo_photo( 'band-stage-1', 'la-sala-2.svg' );
-$imagen2   = ! empty( $section['imagen_secundaria'] ) ? $section['imagen_secundaria'] : salasvq_demo_photo( 'crowd-hands-1', 'la-sala-1.svg' );
+$imagen    = ! empty( $section['imagen'] ) ? $section['imagen'] : salasvq_demo_photo( 'bar-interior-1', 'la-sala-2.svg' );
+$imagen2   = ! empty( $section['imagen_secundaria'] ) ? $section['imagen_secundaria'] : salasvq_demo_photo( 'venue-empty-1', 'la-sala-1.svg' );
 $lineas    = array_filter( array_map( 'trim', explode( "\n", $titular ) ) );
 ?>
 <section class="section la-sala" data-component="image-text-section">
 	<figure class="la-sala__media la-sala__media--main">
 		<img src="<?php echo esc_url( $imagen2 ); ?>" alt="" loading="lazy">
-		<figcaption>CULTURA REAL<br>PERSONAS DE CERCA</figcaption>
 	</figure>
 
 	<div class="la-sala__copy">
