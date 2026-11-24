@@ -1152,6 +1152,11 @@ body {
 	text-transform: uppercase;
 }
 
+.site-footer__logo-img {
+	height: 4rem;
+	width: auto;
+}
+
 .site-footer__address {
 	font-style: normal;
 	font-size: var(--fs-body);

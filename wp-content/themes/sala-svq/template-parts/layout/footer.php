@@ -14,12 +14,17 @@ $ig       = salasvq_option( 'url_instagram', '#' );
 $tiktok   = salasvq_option( 'url_tiktok', '#' );
 $spotify  = salasvq_option( 'url_spotify', '#' );
 $youtube  = salasvq_option( 'url_youtube', '#' );
+$logo     = salasvq_option( 'logo', SALASVQ_URI . '/assets/img/brand/logo.svg' );
 ?>
 <footer class="site-footer" data-component="footer">
 	<div class="site-footer__top">
 		<div class="site-footer__brand">
-			<span>SALA</span>
-			<span>SVQ</span>
+			<?php if ( $logo ) : ?>
+				<img src="<?php echo esc_url( $logo ); ?>" alt="Sala SVQ" class="site-footer__logo-img">
+			<?php else : ?>
+				<span>SALA</span>
+				<span>SVQ</span>
+			<?php endif; ?>
 		</div>
 
 		<address class="site-footer__address">

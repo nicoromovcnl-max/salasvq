@@ -3,6 +3,9 @@
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<?php if ( ! has_site_icon() ) : ?>
+		<link rel="icon" type="image/svg+xml" href="<?php echo esc_url( SALASVQ_URI . '/assets/img/brand/logo.svg' ); ?>">
+	<?php endif; ?>
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>

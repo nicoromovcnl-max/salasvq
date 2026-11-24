@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $entradas_url = salasvq_option( 'entradas_url', '#' );
-$logo         = salasvq_option( 'logo', '' );
+$logo         = salasvq_option( 'logo', SALASVQ_URI . '/assets/img/brand/logo.svg' );
 ?>
 <header class="site-header" data-component="header">
 	<div class="site-header__inner">
